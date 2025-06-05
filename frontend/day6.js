@@ -38,14 +38,14 @@ if(!umar==18){
     console.log("you are 18 and can drive if you have a car")
 }
 
-let marks = Number( prompt("Enter a number"));
-if(marks>90 && marks<=100){
-    console.log("A+")
-}else if(marks>80 && marks<=90){
-    console.log("B+")
-}else {
-    console.log("Ok Ok ")
-}
+// let marks = Number( prompt("Enter a number"));
+// if(marks>90 && marks<=100){
+//     console.log("A+")
+// }else if(marks>80 && marks<=90){
+//     console.log("B+")
+// }else {
+//     console.log("Ok Ok ")
+// }
 
 
 //ternary Operator
