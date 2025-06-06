@@ -12,9 +12,9 @@ console.log(age ** grace)
 
 //conditionls
 
-if((age+grace)>18){
+if ((age + grace) > 18) {
     console.log("You can drive");
-}else{
+} else {
     console.log("YOu cannot drive");
 }
 
@@ -23,18 +23,18 @@ if((age+grace)>18){
 
 console.log(age % grace)
 
-age+=grace// 45 + 2
+age += grace// 45 + 2
 console.log(age)
 
 
 // = = is to check if it is equal to or not
 
 let umar = 18
-if(!umar==18){
+if (!umar == 18) {
     console.log("YOur age is not 18")
-    
 
-}else{
+
+} else {
     console.log("you are 18 and can drive if you have a car")
 }
 
@@ -55,10 +55,10 @@ let a = 6
 let b = 8
 
 
-let c=a>b?(a-b):(b-a) // when a>b the do a-b else do b-a 
+let c = a > b ? (a - b) : (b - a) // when a>b the do a-b else do b-a 
 
- console.log(c)
-let d= a>b>c ?(a**2):(b**2)
+console.log(c)
+let d = a > b > c ? (a ** 2) : (b ** 2)
 
 console.log(d)
 
