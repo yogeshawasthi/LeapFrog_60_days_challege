@@ -36,3 +36,6 @@ console.log(b.replace("sh","77"))
 
 console.log(b.concat(a,"Aishwariya"," Rahul"))
 console.log(b)
+
+
+//june 9 done
