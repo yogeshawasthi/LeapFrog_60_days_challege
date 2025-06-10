@@ -2,16 +2,16 @@
 
  let marks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-//  console.log(marks[0])
-//  console.log(marks[1])
+ console.log(marks[0])
+ console.log(marks[1])
 
-//  console.log(marks.length)
+ console.log(marks.length)
 
-//  marks[0]=4238; //mutable can be changed after definition of array
-//  console.log(marks)
+ marks[0]=4238; //mutable can be changed after definition of array
+ console.log(marks)
  
 
-//  console.log(marks,typeof marks)
+ console.log(marks,typeof marks)
 
 console.log(marks.toString); //convert to string
 

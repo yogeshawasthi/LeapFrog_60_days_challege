@@ -22,3 +22,9 @@ document.querySelectorAll(".box").forEach((element) => {
 e = document.getElementsByTagName("div");
 e[4].closest("#redbox")
 console.log
+
+
+
+alert("This is a alert box")
+
+ale
