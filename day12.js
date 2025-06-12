@@ -74,3 +74,6 @@ p3.then((a)=>{
 }).catch(err=>{
     console.log(err)
 })
+
+
+//day 12 done 
