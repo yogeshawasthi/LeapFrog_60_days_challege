@@ -1,0 +1,14 @@
+{
+  "name": "mern2.0",
+  "version": "1.0.0",
+  "description": "This is project with yogesh bhatt with leapfrog challenge",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yogesh Awasthi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

@@ -1,0 +1,24 @@
+Day 3 
+folder banayim 
+npm init  command hanera 
+project lai initalize garim 
+
+
+Tip:npm init -y  for default options
+
+understanding node package  manager (npm)
+
+npm install 
+
+npm install express
+Tip npm i express
+
+
+sementic versionaning
+(4(major).18(minor).2(path))
+
+
+
+#port number
+localhost:3000
+127.0.0.1:3000//same
