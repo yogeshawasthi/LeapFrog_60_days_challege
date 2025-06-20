@@ -1,12 +1,13 @@
 const mongoose= require('mongoose');
 const Schema = mongoose.Schema
 
-const blogSchema = new Schema({
+const bookSchema = new Schema({
     bookName:{
-        type : String
+        type : String,
+        unique : true
     },
     bookPrice:{
-        type : String
+        type : Number
     },
     isbnNumber : {
         type: Number
@@ -17,4 +18,10 @@ const blogSchema = new Schema({
     publishedAt:{
         type : Date
     },
+    publication:{
+        type : String
+    }
 })
+
+const Book =  mongoose.model('Book',bookSchema) // table name 'Book' and having collums as bookSchema
+module.exports = Book
