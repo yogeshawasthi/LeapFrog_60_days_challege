@@ -68,26 +68,79 @@ app.get("/book/:id", async (req, res) => {
                 message: "No books found"
             })
         }
-       else {
-        res.status(200).json({
-            message: "You are requesting a single book",
-            data: book
+        else {
+            res.status(200).json({
+                message: "You are requesting a single book",
+                data: book
+            })
+        }
+
+    } catch (error) {
+
+        res.status(404).json({
+            message: "Something Went wrong"
         })
+
     }
-
-} catch (error) {
-
-    res.status(404).json({
-        message: "Something Went wrong"
-    })
-
-}
 
 })
 
 
-// more apis are coming tommorow 
-//update and delete apis osoon 
+
+//update and delete apis soon
+
+//delete the boook
+app.delete("/book/:id", async (req, res) => {
+    const id = req.params.id
+    await Book.findByIdAndDelete(id)
+    res.status(200).json({
+        message: "Book deleted Sucessfully"
+    })
+
+})
+
+// update the book by findbyidupdate
+//path vs put   . path is more optimized
+
+app.patch("/book/:id", async (req, res) => {
+    const id = req.params.id
+    const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication } = req.body
+
+  await  Book.findByIdAndUpdate(id, {
+        bookName: bookName,
+        bookPrice: bookPrice,
+        authorName: authorName,
+        publication: publication,
+        publishedAt: publishedAt,
+        isbnNumber: isbnNumber
+    })
+    res.status(201).json({
+        message:"Book Is Updated SuccessFully"
+    })
+})
+
+
+//rest api   
+
+// getbooks -->/getallbooks
+//delete book  ->/delete/:id-delete
+//update book -->/udate/:id-path
+//Get Author info -->/author/1
+
+
+//restful api
+// getbooks -->/books  --get
+//delete book  ->/books/:id -delete
+//update book -->/books/:id -path
+//single book  ->/books/:id -get
+// Add book  --->/books  -post
+//Get Author info -->/books/comment/1
+
+
+
+
+
+
 
 
 
