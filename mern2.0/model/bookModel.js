@@ -10,7 +10,7 @@ const bookSchema = new Schema({
         type : Number
     },
     isbnNumber : {
-        type: Number
+        type: Number                                                 
     },
     authorName:{
         type:String
@@ -19,6 +19,9 @@ const bookSchema = new Schema({
         type : Date
     },
     publication:{
+        type : String
+    },
+    image:{
         type : String
     }
 })

@@ -3,7 +3,7 @@
  
  async function connectToDatabase(){
     await  mongoose.connect(ConnectionString)
-    console.log("Connected to DB sucessfully")
+    console.log("Connected to DB sucessfully") 
 }
 
-module.exports = connectToDatabase
+module.exports = connectToDatabase       
