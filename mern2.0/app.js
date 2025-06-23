@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const fs = require('fs')
 const mongoose = require('mongoose');
 
 const connectToDatabase = require('./database');
@@ -12,7 +13,9 @@ const Book = require('./model/bookModel')
 //const app = require('express')()
 
 app.use(express.json())
-
+const {multer,storage} =require('./middleware/multerConfig')
+ //imort both of of them
+ const upload = multer({storage:storage})
 connectToDatabase();
 
 app.get("/", (req, res) => {
@@ -31,17 +34,30 @@ app.get("/", (req, res) => {
 })
 
 
-// create a book table
-app.post("/book", async (req, res) => {
-    const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication } = req.body
+// req.body ---> only text comes
+// req.file --->files like image,video comes
 
+// create a book table
+app.post("/book",upload.single('image'), async (req, res) => {
+
+    console.log(req.file)
+    let fileName;  
+    if(!req.file){
+        fileName = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+
+    }else{
+        fileName = "http://localhost:3000/"+ req.file.filename
+    }
+
+    const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication } = req.body
     await Book.create({
         bookName,
         bookPrice,
         isbnNumber,
         authorName,
         publishedAt,
-        publication
+        publication,
+        imageUrl: fileName
     })
     res.status(201).json({
         "message": "Book Created Sucessfully "
@@ -102,9 +118,28 @@ app.delete("/book/:id", async (req, res) => {
 // update the book by findbyidupdate
 //path vs put   . path is more optimized
 
-app.patch("/book/:id", async (req, res) => {
+app.patch("/book/:id",upload.single('image'), async (req, res) => {
     const id = req.params.id
     const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication } = req.body
+
+    const oldDatas = await Book.findById(id)
+    let fileName;
+    if(req.file){ 
+
+        const oldImagePath = oldDatas.imageUrl
+        console.log(oldImagePath)
+        const localHostUrlLength = "http://localhost:3000/".length
+        const newOldImagePath = oldImagePath.slice(localHostUrlLength)
+        console.log(newOldImagePath)
+        fs.unlink(`storage/${newOldImagePath}`,(err)=>{
+            if(err){
+                console.log(err)
+            }else{
+                console.log("File Deleted Sucessfully")
+            }
+        })
+        fileName = "http://localhost:3000" + req.file.filename
+    }
 
   await  Book.findByIdAndUpdate(id, {
         bookName: bookName,
@@ -112,7 +147,8 @@ app.patch("/book/:id", async (req, res) => {
         authorName: authorName,
         publication: publication,
         publishedAt: publishedAt,
-        isbnNumber: isbnNumber
+        isbnNumber: isbnNumber,
+        imageUrl:fileName
     })
     res.status(201).json({
         message:"Book Is Updated SuccessFully"
@@ -140,7 +176,8 @@ app.patch("/book/:id", async (req, res) => {
 
 
 
-
+app.use(express.static("./storage/")) // gives acees to file form storage folder
+// allow read operatons on storage folder
 
 
 
