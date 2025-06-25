@@ -1,6 +1,5 @@
 const multer = require('multer')
 
-<<<<<<< HEAD
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { //where to store
         // console.log(file)
@@ -34,20 +33,6 @@ const storage = multer.diskStorage({
 })
 
 module.exports = {
-=======
- const storage = multer.diskStorage({
-    destination : function(req,file,cb){ //where to store
-         cb(null,'./storage')   // cb(error,success) sucess - save to storage folder
-    },
-    filename : function (req,file,cb){//How to store it
-     // what name should be given while storing the data
-        cb(null,"Yogesh-"+file.originalname)
-    }
-
-})     
-
-module.exports ={
->>>>>>> d28ad24821130a7fc42a7165a4e1bb7f3ae06627
     multer,
     storage
 }
