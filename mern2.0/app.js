@@ -34,8 +34,14 @@ app.get("/", (req, res) => {
 })
 
 
+<<<<<<< HEAD
 // req.body ---> only text comes
 // req.file --->files like image,video comes
+=======
+// create a book table
+app.post("/book",upload.single('image'), async (req, res) => {
+    const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication ,image} = req.body
+>>>>>>> d28ad24821130a7fc42a7165a4e1bb7f3ae06627
 
 // create a book table
 app.post("/book",upload.single('image'), async (req, res) => {
@@ -57,7 +63,11 @@ app.post("/book",upload.single('image'), async (req, res) => {
         authorName,
         publishedAt,
         publication,
+<<<<<<< HEAD
         imageUrl: fileName
+=======
+        image
+>>>>>>> d28ad24821130a7fc42a7165a4e1bb7f3ae06627
     })
     res.status(201).json({
         "message": "Book Created Sucessfully "
