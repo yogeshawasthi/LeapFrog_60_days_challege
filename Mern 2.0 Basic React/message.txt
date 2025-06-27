@@ -11,3 +11,6 @@
 9. Never get demotivated on any thing like evryone is doing great
 10. Connect with people of your interest 
 11. Look For Interview questions and improve problem Solving Skillset
+
+Day 27 done vidoe no 9 total theory 
+   how react works . Dom manupalation , virtual dom . serverside rendering , client side rendering
