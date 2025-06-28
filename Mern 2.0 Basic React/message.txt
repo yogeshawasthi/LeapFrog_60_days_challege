@@ -14,3 +14,7 @@
 
 Day 27 done vidoe no 9 total theory 
    how react works . Dom manupalation , virtual dom . serverside rendering , client side rendering
+
+
+Day 28
+   no electricity its 7 pm still not light i think i will be finishing up till midnight today
