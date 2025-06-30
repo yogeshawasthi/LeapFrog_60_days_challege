@@ -1,15 +1,23 @@
-import Test from "./Test";
+
+import PropTypes from "prop-types";
 
 
-const Button = ({buttoncontent,arkocontent}) => {
-    // const {buttoncontent} = props;
+const Button = ({ buttoncontent, arkocontent }) => {
     return (
         <>
-        <button>{buttoncontent}</button>
-        <button>{arkocontent}</button>
-        <Test dataToSend={arkocontent} />
-        
+            <button>{buttoncontent}</button>
+            <button>{arkocontent}</button>
         </>
-    );
+    )
 }
-export default Button
+
+// Button.defaultProps = {
+//     buttoncontent: "Default Button",
+//     arkocontent: "Default number"
+// }
+
+Button.PropTypes = {
+    arkocontent: PropTypes.string.isRequired,
+}
+
+export default Button;

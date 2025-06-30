@@ -1,19 +1,22 @@
-import Button from "./Button"
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './Home';
+import About from './About';
+import Contact from './Contact';
 
 function App() {
-
-
   return (
     <>
-      <Button buttoncontent="Login"  arkocontent={1}/>
-      <Button buttoncontent="Register" arkocontent={2}/>
-      <Button buttoncontent="LogOut"arkocontent={3}/>
+      <BrowserRouter>
+        <Routes>
+          <Route  path='/' element={<Home />} />
+          <Route  path='/about' element={<About/>} />
+          <Route  path='/contact' element={<Contact/>} />
+        </Routes>
 
-      
+      </BrowserRouter>
+
     </>
-  )
+  );
 }
 
-export default App
-
+export default App;
