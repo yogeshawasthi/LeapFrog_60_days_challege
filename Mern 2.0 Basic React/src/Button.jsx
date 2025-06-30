@@ -1,9 +1,15 @@
+import Test from "./Test";
 
 
-const Button = (props) => {
-    console.log(props);
+const Button = ({buttoncontent,arkocontent}) => {
+    // const {buttoncontent} = props;
     return (
-        <button>{props.buttoncontent}</button>
+        <>
+        <button>{buttoncontent}</button>
+        <button>{arkocontent}</button>
+        <Test dataToSend={arkocontent} />
+        
+        </>
     );
 }
 export default Button
