@@ -23,3 +23,7 @@ Day 28
 day 30
  porops drilig (nesting of props) solution (state management)
  Routing (React Router DoM) ()()()()()()()
+
+day 31
+
+   
