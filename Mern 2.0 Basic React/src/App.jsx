@@ -1,21 +1,40 @@
-
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 
 function App() {
-  const [count,setCount]= useState(0) //retunrs array count and  function
-  const[name,setName]=useState("Yogesh Awasthi") // can give string
-  const[data,setData] = useState([]) // array can be passed
+
+  const [count,setCount]=useState(0)
+  const [nextCount,setNextCount]=useState(0)
+
+//frist type
+  // useEffect(()=>{
+  //   console.log("Not Count wala useEffect")
+
+  // },[])
+  // useEffect(()=>{
+  //   console.log("This is empty")
+
+  // },[])
+  // useEffect(()=>{
+  //   console.log("this is second empty  ")
+
+  // },[])
  
+  //second type
+  // useEffect(()=>{
+  //   document.title = "Learning useEffect" + count
+  // },[count])
+
+  //third type
+  // useEffect(()=>{
+  //   console.log("Third useState was called")
+
+  // })
   return (
     <>
-      <h1>{count} </h1>
-      
+      <h1>{count}</h1>
       <button onClick={()=>setCount(count+1)}>+</button>
-      <button onClick={()=>setCount(count-1)}> -</button>
-      <h1>{name}</h1>
-      <button onClick={()=>setName("Arjun Chaudhary")}> Change Name</button>
-      <button onClick={()=>setName("Brahma Dhami")}> Change Name</button>
-
+      <h1>{nextCount}</h1>
+      <button onClick={()=>setNextCount(nextCount+1)}>+</button>
     </>
   );
 }
