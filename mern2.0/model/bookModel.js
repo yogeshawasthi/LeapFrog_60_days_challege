@@ -22,7 +22,7 @@ const bookSchema = new Schema({
         type : String
     },
     imageUrl:{
-        type : string
+        type : String
     }
 })
 
