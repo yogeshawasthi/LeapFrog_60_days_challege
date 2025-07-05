@@ -1,0 +1,6 @@
+day 16
+ Explored Today : 
+SOP(Same Origin Policy)
+CORS(Cross Origin Resource Sharing)
+Why Do We need them?
+Whitelisting, blacklisting in CORS
