@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 const mongoose = require('mongoose');
-
 const connectToDatabase = require('./database');
 const Book = require('./model/bookModel')
 
@@ -12,10 +11,22 @@ const Book = require('./model/bookModel')
 // Alternative
 //const app = require('express')()
 
+
+const { multer, storage } = require('./middleware/multerConfig')
+//imort both of of them
+const upload = multer({ storage: storage })
+
+//cors package import
+const cors = require('cors')
+
+app.use(cors({
+    origin: '*' //allow all sites whitleist to all of them
+    // origin:['http://localhost:5173'] // 
+}))
+
+
+
 app.use(express.json())
-const {multer,storage} =require('./middleware/multerConfig')
- //imort both of of them
- const upload = multer({storage:storage})
 connectToDatabase();
 
 app.get("/", (req, res) => {
@@ -38,15 +49,15 @@ app.get("/", (req, res) => {
 // req.file --->files like image,video comes
 
 // create a book table
-app.post("/book",upload.single('image'), async (req, res) => {
+app.post("/book", upload.single('image'), async (req, res) => {
 
     console.log(req.file)
-    let fileName;  
-    if(!req.file){
+    let fileName;
+    if (!req.file) {
         fileName = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
 
-    }else{
-        fileName = "http://localhost:3000/"+ req.file.filename
+    } else {
+        fileName = "http://localhost:3000/" + req.file.filename
     }
 
     const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication } = req.body
@@ -118,40 +129,40 @@ app.delete("/book/:id", async (req, res) => {
 // update the book by findbyidupdate
 //path vs put   . path is more optimized
 
-app.patch("/book/:id",upload.single('image'), async (req, res) => {
+app.patch("/book/:id", upload.single('image'), async (req, res) => {
     const id = req.params.id
     const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication } = req.body
 
     const oldDatas = await Book.findById(id)
     let fileName;
-    if(req.file){ 
+    if (req.file) {
 
         const oldImagePath = oldDatas.imageUrl
         console.log(oldImagePath)
         const localHostUrlLength = "http://localhost:3000/".length
         const newOldImagePath = oldImagePath.slice(localHostUrlLength)
         console.log(newOldImagePath)
-        fs.unlink(`storage/${newOldImagePath}`,(err)=>{
-            if(err){
+        fs.unlink(`storage/${newOldImagePath}`, (err) => {
+            if (err) {
                 console.log(err)
-            }else{
+            } else {
                 console.log("File Deleted Sucessfully")
             }
         })
         fileName = "http://localhost:3000" + req.file.filename
     }
 
-  await  Book.findByIdAndUpdate(id, {
+    await Book.findByIdAndUpdate(id, {
         bookName: bookName,
         bookPrice: bookPrice,
         authorName: authorName,
         publication: publication,
         publishedAt: publishedAt,
         isbnNumber: isbnNumber,
-        imageUrl:fileName
+        imageUrl: fileName
     })
     res.status(201).json({
-        message:"Book Is Updated SuccessFully"
+        message: "Book Is Updated SuccessFully"
     })
 })
 
