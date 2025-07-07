@@ -78,7 +78,7 @@ app.post("/book", upload.single('image'), async (req, res) => {
 // all book
 app.get("/book", async (req, res) => {
     const books = await Book.find()//returns array
-    console.log(books)
+    // console.log(books)
     res.status(200).json({
         message: "Books Fecthed Sucessfully",
         data: books
