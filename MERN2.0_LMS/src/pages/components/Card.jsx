@@ -19,7 +19,8 @@ const Card = ({book}) => {
                     Book ISBN num : {book.isbnNumber}
                 </p>
                 {/* <button onClick={() => navigate('/book')}>See More</button> */}
-                <Link to={`/book/${book._id}`}>See More </Link>
+                <Link to={`/book/${book._id}`} className='bg-green-600 rounded-xl p-1 m-1 text-white'>See More </Link>
+                <button className='bg-red-600 rounded-xl p-1 m-1 text-white'>Delete</button>
             </div>
 
         </div>

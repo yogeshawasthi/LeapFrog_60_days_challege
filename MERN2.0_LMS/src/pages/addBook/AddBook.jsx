@@ -1,36 +1,90 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddBook = () => {
-  const [bookName, setBookName] = useState("");
-  const [bookPrice, setBookPrice] = useState("");
-  const [isbnNumber, setIsbnNumber] = useState(null);
-  const [authorName, setAuthorName] = useState("");
-  const [publishedAt, setPublishedAt] = useState("");
-  const [publication, setPublication] = useState("");
-  const [image,setImage] = useState(null)
+  // const [bookName, setBookName] = useState("");
+  // const [bookPrice, setBookPrice] = useState("");
+  // const [isbnNumber, setIsbnNumber] = useState(null);
+  // const [authorName, setAuthorName] = useState("");
+  // const [publishedAt, setPublishedAt] = useState("");
+  // const [publication, setPublication] = useState("");
+  // const [image, setImage] = useState(null);
 
-  const handleSubmit = async(e)=>{
-    e.preventDefault()
-   const response = await axios.post('http://localhost/book',{
-      bookName,
-      bookPrice,
-      isbnNumber,
-      authorName,
-      publishedAt,
-      publication,
-      image
-    },{
-      headers:{
-        'Content-Type' :'multipart/form-data'
+  // const handleSubmit = async (e) => {
+    //   e.preventDefault()
+    //  const response = await axios.post('http://localhost:3000/book',{
+    //     bookName,
+    //     bookPrice,
+    //     isbnNumber,
+    //     authorName,
+    //     publishedAt,
+    //     publication,
+    //     image
+    //   },{
+    //     headers : {
+    //       'Content-Type' :'multipart/form-data'
+    //     }
+    //   })
+    // }
+
+    //next way to send form data
+    // e.preventDefault()
+    // const formData = new FormData() //{}
+    // formData.append('bookName',bookName)
+    // formData.append('bookPrice',bookPrice)
+    // formData.append('isbnNumber',isbnNumber)
+    // formData.append('authorName',authorName)
+    // formData.append('publishedAt',publishedAt)
+    // formData.append('image',image)
+    // formData.append('publication',publication)
+
+    // const response = await axios.post('http://localhost:3000/book',formData)
+
+    // }
+
+    //thrid way
+    const navigate = useNavigate()
+    const [data, setData] = useState({
+      bookName: "",
+      bookPrice: "",
+      isbnNumber: null,
+      authorName: "",
+      publishedAt: "",
+      publication: "",
+    });
+    const [image,setImage] = useState(null);
+
+    const handleChange = async(e) => {
+      const { name, value } = e.target;
+      setData({
+        ...data, 
+        [name]: value
+      });
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      const formData = new FormData()
+
+      Object.entries(data).forEach(([key,value])=>{
+        formData.append(key,value)
+
+      })
+      formData.append('image',image)
+      
+      const response = await axios.post('http://localhost:3000/book',formData)
+      if(response.status===201){
+        navigate("/")
+      }else{
+        alert("Something went worng")
       }
-    })
-  }
 
-
-
-  return (
+    }
+  
+  
+   return (
     <>
       <Navbar />
       <div className="bg-white rounded-lg shadow-md p-8 w-full mx-auto my-16 max-w-md">
@@ -48,7 +102,7 @@ const AddBook = () => {
               id="bookName"
               name="bookName"
               className="mt-1 p-2 w-full border rounded-md text-gray-800"
-              onChange={(e)=>setBookName(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -63,7 +117,7 @@ const AddBook = () => {
               id="bookPrice"
               name="bookPrice"
               className="mt-1 p-2 w-full border rounded-md text-gray-800"
-              onChange={(e)=>setBookPrice(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-6">
@@ -78,7 +132,7 @@ const AddBook = () => {
               id="isbnNumber"
               name="isbnNumber"
               className="mt-1 p-2 w-full border rounded-md text-gray-800"
-              onChange={(e)=>setIsbnNumber(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-6">
@@ -93,7 +147,7 @@ const AddBook = () => {
               id="authorName"
               name="authorName"
               className="mt-1 p-2 w-full border rounded-md text-gray-800"
-              onChange={(e)=>setAuthorName(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-6">
@@ -108,7 +162,7 @@ const AddBook = () => {
               id="publication"
               name="publication"
               className="mt-1 p-2 w-full border rounded-md text-gray-800"
-              onChange={(e)=>setPublication(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-6">
@@ -123,7 +177,7 @@ const AddBook = () => {
               id="publishedAt"
               name="publishedAt"
               className="mt-1 p-2 w-full border rounded-md text-gray-800"
-              onChange={(e)=>setPublishedAt(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-6">
@@ -151,6 +205,6 @@ const AddBook = () => {
       </div>
     </>
   );
-};
+}
 
 export default AddBook;
