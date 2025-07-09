@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const SingleBook = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [book, setBook] = useState({});
   const fetchBook = async () => {
     const response = await axios.get(`http://localhost:3000/book/${id}`);
@@ -12,6 +13,16 @@ const SingleBook = () => {
       setBook(response.data.data);
     }
   };
+  const deleteHandle = async () => {
+    const response = await axios.delete("http://localhost:3000/book/" + id);
+    if (response.status === 200) {
+      console.log("Deleted ");
+      navigate("/");
+    }
+  }
+  const goBack = ()=>{
+     navigate("/");
+  }
 
   useEffect(() => {
     fetchBook();
@@ -19,7 +30,7 @@ const SingleBook = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center mt-20  ">
+      <div className="flex flex-col items-center justify-center mt-20 border-2 ">
         <img
           className="h-50 w-60"
           src={book.imageUrl}
@@ -42,6 +53,13 @@ const SingleBook = () => {
             <p className="text-gray-700 text-base">
             Published At:  {book.publishedAt}
             </p>
+            <button onClick={deleteHandle} className="bg-red-800 p-2 text-white rounded-lg">Delete</button>
+            <Link to={`/editBook/${book._id}`}>
+            <button className="bg-blue-800 p-2 ml-2 text-white rounded-lg">Edit</button>
+           </Link>
+            <button  onClick={goBack} className="bg-green-700 p-2 ml-2 text-white rounded-lg">Go Back</button>
+            
+            
         </div>
       </div>
     </>

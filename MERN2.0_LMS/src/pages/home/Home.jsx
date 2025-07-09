@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className='flex flex-wrap justify-evenly mt-20'>
+      <div className='flex flex-wrap justify-evenly mt-20 bg-bla'>
 
         {
           books.length >0 && books.map((book)=>{

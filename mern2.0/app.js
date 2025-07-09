@@ -161,7 +161,7 @@ app.patch("/book/:id", upload.single('image'), async (req, res) => {
         isbnNumber: isbnNumber,
         imageUrl: fileName
     })
-    res.status(201).json({
+    res.status(200).json({
         message: "Book Is Updated SuccessFully"
     })
 })
