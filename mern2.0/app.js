@@ -149,7 +149,7 @@ app.patch("/book/:id", upload.single('image'), async (req, res) => {
                 console.log("File Deleted Sucessfully")
             }
         })
-        fileName = "https://leapfrog-60-days-challege.onrender.com/" + req.file.filename
+        fileName = "http://localhost:3000" + req.file.filename
     }
 
     await Book.findByIdAndUpdate(id, {
