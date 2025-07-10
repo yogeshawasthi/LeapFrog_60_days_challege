@@ -57,7 +57,7 @@ app.post("/book", upload.single('image'), async (req, res) => {
         fileName = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
 
     } else {
-        fileName = "http://localhost:3000/" + req.file.filename
+        fileName = "https://leapfrog-60-days-challege.onrender.com/" + req.file.filename
     }
 
     const { bookName, bookPrice, isbnNumber, authorName, publishedAt, publication } = req.body
