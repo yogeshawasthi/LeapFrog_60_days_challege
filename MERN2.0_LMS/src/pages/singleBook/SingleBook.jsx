@@ -8,13 +8,13 @@ const SingleBook = () => {
   const navigate = useNavigate();
   const [book, setBook] = useState({});
   const fetchBook = async () => {
-    const response = await axios.get(`http://localhost:3000/book/${id}`);
+    const response = await axios.get(`https://leapfrog-60-days-challege.onrender.com/book/${id}`);
     if (response.status == 200) {
       setBook(response.data.data);
     }
   };
   const deleteHandle = async () => {
-    const response = await axios.delete("http://localhost:3000/book/" + id);
+    const response = await axios.delete("https://leapfrog-60-days-challege.onrender.com/book/" + id);
     if (response.status === 200) {
       console.log("Deleted ");
       navigate("/");

@@ -7,7 +7,7 @@ const Home = () => {
   const [books, setBooks] = useState([])
 
   const fetchBooks = async () => {
-    const response = await axios.get('http://localhost:3000/book')
+    const response = await axios.get('https://leapfrog-60-days-challege.onrender.com/book')
 
     if (response.status == 200) {
       setBooks(response.data.data)

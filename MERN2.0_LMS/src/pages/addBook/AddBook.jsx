@@ -74,7 +74,7 @@ const AddBook = () => {
       })
       formData.append('image',image)
       
-      const response = await axios.post('http://localhost:3000/book',formData)
+      const response = await axios.post('https://leapfrog-60-days-challege.onrender.com/book',formData)
       if(response.status===201){
         navigate("/")
       }else{
