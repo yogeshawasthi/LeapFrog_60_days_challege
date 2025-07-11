@@ -1,1 +1,1 @@
-export const backendUrl = 'https://leapfrog-60-days-challege.onrender.com/'
+export const backendUrl = 'https://leapfrog-60-days-challege.onrender.com'
