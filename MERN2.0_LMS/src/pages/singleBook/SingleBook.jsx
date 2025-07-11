@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { backendUrl } from "../config";
 
 const SingleBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [book, setBook] = useState({});
   const fetchBook = async () => {
-    const response = await axios.get(`https://leapfrog-60-days-challege.onrender.com/book/${id}`);
+    const response = await axios.get(`${backendUrl}/book/${id}`);
     if (response.status == 200) {
       setBook(response.data.data);
     }
   };
   const deleteHandle = async () => {
-    const response = await axios.delete("https://leapfrog-60-days-challege.onrender.com/book/" + id);
+    const response = await axios.delete(`${backendUrl}/book/` + id);
     if (response.status === 200) {
       console.log("Deleted ");
       navigate("/");
