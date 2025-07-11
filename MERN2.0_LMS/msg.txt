@@ -4,3 +4,104 @@ SOP(Same Origin Policy)
 CORS(Cross Origin Resource Sharing)
 Why Do We need them?
 Whitelisting, blacklisting in CORS
+
+
+
+# Learned about typescript
+let num = 5
+let message:string = "hello world"
+let isNeplai = true
+
+//Arrays
+
+let numbers:number[] = [1,2,3,]
+let names:string[]=["Yogesh","awasthi","patanjali"]
+
+
+//enum
+enum Direction{
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+let useDirection:Direction = Direction.Up
+interface Person{
+    name : string;
+    age: number;
+    isNepali:boolean;
+}
+
+// let user={
+//     name :"Yogesh awasthi",
+//     age : 22,
+//     isNepali:true
+
+// }
+
+// interface Emplyoee extends Person{
+//     role:string;
+    
+// }
+// let emplyoee:Emplyoee={
+//     age:22,
+//     name:"yogesh awasthi",
+//     isNepali:true,
+//     role:"Developer"
+// }
+
+type ID = number
+let userId:ID =12
+
+type Username = string
+let useName:Username = "Yogesh Awasthi"
+let useName2:Username = "Arjun Chaudhary"
+
+// union 
+type Id = number | string
+let userId2:Id = 999
+let userId3:Id = "Yogesh"
+
+//intersection
+type Employee = {
+    name : string;
+    role : string
+}
+type Skill={
+    langauge:string
+}
+
+type SoftwareEngineer = Employee & Skill
+
+let developer:SoftwareEngineer = {
+    name:"Yogesh",
+    role :"Fronted Dev",
+    langauge:"JavaScript"
+
+}
+
+
+//functions in tspan
+function add(a:number,b:number):number | void{
+    return a+b
+    
+}
+let result =add(2,3);
+
+type Multiply = (a:number,b:number)=>number
+const mltiply:Multiply = (a,b)=>a*b
+
+let result2 = mltiply(1,2)
+
+interface User{
+    id : number,
+    name : string,
+    email?:string //?-->optional
+}
+
+let friend1:User={
+    id: 1,
+    name:"Yogesh awasthi",
+    email :"hellow@gmail.com"
+}
