@@ -138,10 +138,10 @@ app.patch("/book/:id", upload.single('image'), async (req, res) => {
     if (req.file) {
 
         const oldImagePath = oldDatas.imageUrl
-        console.log(oldImagePath)
+        // console.log(oldImagePath)
         const localHostUrlLength = "http://localhost:3000/".length
         const newOldImagePath = oldImagePath.slice(localHostUrlLength)
-        console.log(newOldImagePath)
+        // console.log(newOldImagePath)
         fs.unlink(`storage/${newOldImagePath}`, (err) => {
             if (err) {
                 console.log(err)
