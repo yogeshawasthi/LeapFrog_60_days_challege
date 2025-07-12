@@ -105,3 +105,87 @@ let friend1:User={
     name:"Yogesh awasthi",
     email :"hellow@gmail.com"
 }
+
+
+
+
+typescript generic and OOP
+
+
+
+
+//OOP - Object orineted Programming
+
+//Typescript generic and oop 
+//Day 22
+
+
+function addTwoNumber(num1:number,num2:number):number{
+    return num1+num2
+}
+addTwoNumber(2,3)
+function addTwoString(str1:string,str2:string):string{
+    return str1+str2
+}
+function add<T>(data1:T,data2:T):string{
+    return `${data1} + ${data2}`
+}
+add<string>('1','2')
+
+
+function identity<T>(param:T):T{
+    return param
+}
+
+
+let res = identity<string>("hellow everybody")
+console.log(res)
+
+interface Data <T,U>{
+    frist : T,
+    second:U
+}
+
+let data:Data<number,string>={
+    frist:1,
+    second:"Hello everybody"
+}
+
+let data2: Data<string,number>={
+    frist:"Yogesh",
+    second:42
+}
+
+console.log(data.frist)
+console.log(data.second)
+
+console.log(data2)
+
+function combine<T extends string|number>(a:T,b:T):string{
+    return`${a}${b}`
+}
+ let result2 = combine("Yogesh"," Awasthi") 
+let result1 = combine(12,12)
+console.log(result2)
+
+
+
+class Developer{
+    name
+    position
+    
+    constructor(name,position){
+        this.name = name
+        this.position = position
+    }
+    code(text){
+        console.log("I am not Good at Coding" + text)
+    }
+}
+
+let yogesh = new Developer("0",'Full Stack Developer')
+let arjun = new Developer('Arjun Chaudhary','Frontend Developer & Video Editor')
+console.log(yogesh.name)
+console.log(arjun.position) 
+arjun.code("i am arjun chaudhary")
+

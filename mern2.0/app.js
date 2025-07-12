@@ -1,6 +1,6 @@
 const express = require('express')
-const app = express()
-const fs = require('fs')
+const app = express()// create an express app
+const fs = require('fs')// to delete the file
 const mongoose = require('mongoose');
 const connectToDatabase = require('./database');
 const Book = require('./model/bookModel')
@@ -14,10 +14,10 @@ const Book = require('./model/bookModel')
 
 const { multer, storage } = require('./middleware/multerConfig')
 //imort both of of them
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage }) // multer is a middleware to handle multipart/form-data, which is used for uploading files
 
 //cors package import
-const cors = require('cors')
+const cors = require('cors') // to allow cross-origin requests
 
 app.use(cors({
     origin: '*' //allow all sites whitleist to all of them
@@ -26,7 +26,7 @@ app.use(cors({
 
 
 
-app.use(express.json())
+app.use(express.json())// to parse JSON data from the request body
 connectToDatabase();
 
 app.get("/", (req, res) => {
