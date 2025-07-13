@@ -191,7 +191,7 @@ arjun.code("i am arjun chaudhary")
 
 
 
-/  Day 22/ OOP Principles inheritence , polymorphism , encapsulation , abstraction
+/  Day 23/ OOP Principles inheritence , polymorphism , encapsulation , abstraction
 
 
 
