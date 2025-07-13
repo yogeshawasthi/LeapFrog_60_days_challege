@@ -189,3 +189,170 @@ console.log(yogesh.name)
 console.log(arjun.position) 
 arjun.code("i am arjun chaudhary")
 
+
+
+/  Day 22/ OOP Principles inheritence , polymorphism , encapsulation , abstraction
+
+
+
+// inheritance
+class Animal{
+    name : string
+    sound : string
+
+    constructor(name:string,sound:string){
+        this.name = name
+        this.sound = sound
+    }
+    makeSound():void{
+        console.log(`${this.name} says ${this.sound}`)
+    }
+}
+class Bird extends Animal{
+    canFly:boolean
+
+    constructor(name:string,sound:string,canFly:boolean){
+        super(name,sound)
+        this.canFly = canFly
+    }
+    fly():void{
+        if(this.canFly){
+            console.log(`${this.name} is flying`)
+        }else{
+            console.log(`${this.name} cannot Fly`)
+        }
+    }
+
+}
+const eagle= new Bird('Eagel','Screech',true)
+const ostrich = new Bird('Ostrich','scream',false)
+eagle.makeSound()
+eagle.fly()
+eagle.name
+
+ostrich.fly()
+
+
+
+class Shape{
+    color: string
+
+    constructor (color:string){
+        this.color = color
+    }
+    displyaColor():void{
+        console.log(`Color : ${this.color}`)
+    }
+}
+
+
+class Circle extends Shape{
+    radius : number
+
+    constructor(radius:number,color:string){
+        super(color)
+        this.radius = radius
+    }
+    calculateArea():number{
+        return Math.PI * this.radius ** 2
+    }
+}
+
+class Rectangle extends Shape{
+    width : number
+    height : number
+
+    constructor(width:number,height:number,color:string){
+        super(color)
+        this.width = width
+        this.height = height
+    }
+
+    calculateArea():number{
+        return this.width * this.height
+    }
+
+}
+
+const blueCirlce = new Circle(5,'blue')
+blueCirlce.displyaColor()
+console.log(blueCirlce.calculateArea())
+
+const redRectangle = new Rectangle (2,5,'pink')
+
+
+//polymorphism
+
+class Cat{
+    makeSound():void{
+        console.log("Meow")
+    }
+}
+class Dog{
+    makeSound():void{
+        console.log("Bau Bau")
+    }
+}
+function petSounds(pet:any):void{
+    pet.makeSound()
+}
+const mycat = new Cat()
+const myDog = new Dog()
+
+
+petSounds(mycat)
+petSounds(myDog)
+
+
+//encapsulation
+
+class Person{
+  private  _name:string
+    constructor(name:string){
+        this._name = name
+    }
+    getName():string{
+        return this._name
+    }
+    setName(newName:string):void{
+        this._name = newName
+
+    }
+}
+
+
+const person = new Person('Yogesh')
+console.log(person.setName('Hellow'))
+console.log(person.getName())
+
+
+
+
+// abstraction
+
+class Shape{
+    private _color:string
+    constructor(private color:string){
+        this._color = color
+    }
+//abstractioning the implementation detials
+    private _calculatePerimeter():number{
+        console.log("Calculating Perimeter")
+        return 0;
+    }
+
+    displyaInfo():void{
+        const perimeter = this._calculatePerimeter()
+        console.log(`perimeter : ${perimeter}`)
+    }
+}
+
+const myShape = new Shape('red')
+myShape.displyaInfo()
+
+
+
+
+
+
+
