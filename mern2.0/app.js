@@ -197,3 +197,4 @@ app.listen(3000, () => {
     console.log("Nodejs server has started at port 3000")
 })
 
+// Day 23 understood about webscoket 
