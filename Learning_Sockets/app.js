@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
-const { Server } = require("socket.io"); // no need to import Socket
+const { Server, Socket } = require("socket.io"); // no need to import Socket
 const connectToDatabase = require("./database");
+const Book = require("./model/bookModel");
 
 
 connectToDatabase()
@@ -11,29 +12,29 @@ const server = app.listen(4000, () => {
 
 const io = new Server(server); // create socket.io server
 
-io.on("connection", (socket) => {
-//     socket.emit("hi",{
-//         greeting : "Helo how are you"
-//     })
-    // console.log(socket.id); // this will correctly log the connected socket's ID
-   
-    // console.log("Someone has connected!");
+//CRUD (create , read , update , delete)
+io.on('connection', (socket) => {
+    console.log("A user Connected")
+    //addBook
 
-    socket.on('sendData',(data)=>{
-        if(data){
-           
-           io.emit("response","Thank You your data was recieved ")
-           io.emit(` IT is new data${data}`)
-        }
+    socket.on('addBook', async (data) => {
+      try {
+         if (data) {
+                const { bookName, bookPrice } = data
+                const newBook = await Books.create({
+                    bookName,
+                    bookPrice
+                })
 
-    })   
+                io.emit("response", {
+                    status: 200, message: "Book Created Successfully",
+                    data: newBook
+                })
+         }
+      } catch (error) {
+        socket.emit("response",{status : 500 , message :"Something went wrong"})
+        
+      }
+        })
 
-    
-    // socket.on("disconnect",()=>{
-    //     console.log("Disconnected a user")
-    // })
-});
-
-
-
-// 8Vfqsrjzh8chp1ih   yogeshawasthi54321
+})
