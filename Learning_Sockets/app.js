@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
 const { Server } = require("socket.io"); // no need to import Socket
+const connectToDatabase = require("./database");
 
+
+connectToDatabase()
 const server = app.listen(4000, () => {
     console.log("Server has started at Port 4000");
 });
@@ -20,7 +23,9 @@ io.on("connection", (socket) => {
         if(data){
            
            io.emit("response","Thank You your data was recieved ")
+           io.emit(` IT is new data${data}`)
         }
+
     })   
 
     
@@ -28,3 +33,7 @@ io.on("connection", (socket) => {
     //     console.log("Disconnected a user")
     // })
 });
+
+
+
+// 8Vfqsrjzh8chp1ih   yogeshawasthi54321
