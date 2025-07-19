@@ -3,6 +3,7 @@ const app:Application = express()
 const PORT:number = 3000
 
 
+require ("./model/index")
 
 
 app.get("/",(req:Request,res:Response)=>{

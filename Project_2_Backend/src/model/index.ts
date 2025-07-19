@@ -30,4 +30,8 @@ const db:any = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.sequelize.sync({force : false})
+db.sequelize.sync({force : false}).then(()=>{
+    console.log("Yes Migrated")
+})
+
+export default db
