@@ -1,5 +1,6 @@
-import { Sequelize,DataType } from "sequelize";
-import dbConfig from "../config/dbConfig";
+import { Sequelize } from "sequelize";
+import dbConfig from "../database/connection";
+
 
 const sequelize = new Sequelize(dbConfig.db,dbConfig.user,dbConfig.password,{
     host : dbConfig.host,
