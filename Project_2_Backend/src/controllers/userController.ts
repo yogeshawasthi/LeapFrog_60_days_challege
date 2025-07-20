@@ -3,7 +3,7 @@ import User from "../database/models/useModel";
 
 
 class AuthCOntroller{
- async   registerUser(req:Request,res: Response):Promise<void>{
+ public static async   registerUser(req:Request,res: Response):Promise<void>{
         
 
         const {username,email,password} = req.body

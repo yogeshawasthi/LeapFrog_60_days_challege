@@ -7,16 +7,13 @@ import * as dotenv from 'dotenv';
 dotenv.config()
 
 import './database/connection'
+app.use(express.json())
+
+import userRoute from './routes/userRoute'
 
 
-
-app.get("/",(req:Request,res:Response)=>{
-    res.send("Hello, World!");
-})
-
-app.get("/contact",(req:Request,res:Response)=>{
-    res.send("Contact  page.");
-})
+//localhost:3000/register
+app.use("",userRoute)
 
 
 
