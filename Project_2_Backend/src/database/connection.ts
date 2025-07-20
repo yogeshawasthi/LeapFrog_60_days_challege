@@ -7,10 +7,10 @@ const sequelize = new Sequelize({
   dialect: 'mysql',
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST, // ✅ Typo fixed
+  host: process.env.DB_HOST, 
   port: Number(process.env.DB_PORT),
-  models: [__dirname + "/models"], // Make sure you have decorated model files here
-  logging: false, // Optional: disable raw SQL logs
+  models: [__dirname + "/models"], 
+  logging: false,
 });
 
 sequelize.authenticate()
