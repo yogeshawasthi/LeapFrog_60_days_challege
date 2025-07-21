@@ -11,8 +11,4 @@ router.route("/register")
 
 
 
-
-
-
-
 export default router

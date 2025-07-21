@@ -1,5 +1,6 @@
 import { Request,Response } from "express";
 import User from "../database/models/useModel";
+import bcrypt from 'bcrypt'
 
 
 class AuthCOntroller{
@@ -17,7 +18,7 @@ class AuthCOntroller{
        await  User.create({
             username,
             email,
-            password
+            password : bcrypt.hashSync(password,10)
 
         })
         res.status(200).json({
