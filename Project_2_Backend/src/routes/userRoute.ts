@@ -7,6 +7,7 @@ const router:Router = express.Router()
 router.route("/register")
 .post(AuthCOntroller.registerUser)
 
+router.route("/login").post(AuthCOntroller.loginUser)
 
 
 
