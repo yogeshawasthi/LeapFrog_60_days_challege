@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import User from "../database/models/useModel";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'
 
 class AuthCOntroller {
   public static async registerUser(req: Request, res: Response): Promise<void> {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
+
     if (!username || !email || !password) {
       res.status(400).json({
         message: "Please Provide username , email , password",
@@ -16,10 +18,9 @@ class AuthCOntroller {
       username,
       email,
       password: bcrypt.hashSync(password, 10),
+      role : role || 'customer' // default role can be set here
     });
-    res.status(200).json({
-      message: "User Registerd Sucessfully",
-    });
+    
   }
 
   public static async loginUser(req: Request, res: Response): Promise<void> {
@@ -61,12 +62,19 @@ class AuthCOntroller {
         return;
       }
 
-      console.log("✅ Login successful");
-      res.status(200).json({
-        message: "Login successful",
-      });
+     //generate token
+
+     const token = jwt.sign({ id: data.id },"hahaha", {
+      expiresIn: "1h"
+     });
+     // Print the token to the terminal
+     res.status(200).json({
+      message: "Login Sucessful////<3",
+      data: token
+     });
+
+
     } catch (error) {
-      console.error("🔥 Error during login:", error);
       res.status(500).json({
         message: "Something went wrong",
       });

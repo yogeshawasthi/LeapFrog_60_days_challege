@@ -1,9 +1,9 @@
-
 import {
     Table,
     Column,
     Model,
     DataType,
+    AllowNull,
 }from 'sequelize-typescript'
 
 @Table({
@@ -25,7 +25,13 @@ class User extends Model{
         type: DataType.STRING
     
     })
-    declare username : string
+    declare username : string;
+
+   @Column({
+       type: DataType.ENUM('customer','admin'),
+       allowNull:false
+   })
+   declare role : string
 
     @Column({
         type: DataType.STRING
