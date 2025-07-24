@@ -29,7 +29,7 @@ class User extends Model{
 
    @Column({
        type: DataType.ENUM('customer','admin'),
-       allowNull:false
+       defaultValue:"customer"
    })
    declare role : string
 
