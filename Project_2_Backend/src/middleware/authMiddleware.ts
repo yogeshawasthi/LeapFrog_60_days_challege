@@ -2,9 +2,19 @@ import { Request, Response, Application, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User from "../database/models/useModel";
 
+interface AuthRequest extends Request{
+  user?:{
+    username: string;
+    email: string;
+    role: string;
+    password: string;
+    id: string;
+  };
+}
+
 class authMiddleware {
   async isAuthenticated(
-    req: Request,
+    req: AuthRequest,
     res: Response,
     next: NextFunction
   ): Promise<void> {
@@ -34,6 +44,7 @@ class authMiddleware {
               res.status(403).json({
                 message: "No user with that token",
               });
+              return; // Add return to prevent further execution
             }
             req.user = UserData;
             next();
