@@ -12,7 +12,13 @@ interface AuthRequest extends Request{
   };
 }
 
-class authMiddleware {
+
+enum Role{
+  Admin = 'admin',
+  Customer = 'customer'
+}
+
+class AuthMiddleware {
   async isAuthenticated(
     req: AuthRequest,
     res: Response,
@@ -59,4 +65,21 @@ class authMiddleware {
 
     //nextfunction to continue the request f
   }
+restrictTo(...roles:Role[]){
+  return(req:AuthRequest,res:Response,next:NextFunction)=>{
+    let userRole = req.user?.role as Role
+    if(!roles.includes(userRole)){
+      res.status(403).json({
+        message : "you don`t have permission"
+      })
+    }else{
+      next()
+    }
+  }
+
 }
+
+}
+
+
+export default new AuthMiddleware()

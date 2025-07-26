@@ -3,46 +3,45 @@ import {
     Column,
     Model,
     DataType,
-    AllowNull,
-}from 'sequelize-typescript'
+} from 'sequelize-typescript'
 
 @Table({
-    tableName : 'users',
+    tableName: 'users',
     modelName: 'User',
-    timestamps :  true
-
+    timestamps: true
 })
-
-class User extends Model{
+class User extends Model {
     @Column({
-        primaryKey : true,
-        type : DataType.UUID,
+        primaryKey: true,
+        type: DataType.UUID,
         defaultValue: DataType.UUIDV4
     })
-    declare id : string;
+    declare id: string;
 
     @Column({
-        type: DataType.STRING
-    
+        type: DataType.STRING,
+        allowNull: false
     })
-    declare username : string;
+    declare username: string;
 
-   @Column({
+    @Column({
        type: DataType.ENUM('customer','admin'),
        defaultValue:"customer"
    })
    declare role : string
 
-    @Column({
-        type: DataType.STRING
-    })
-    declare email:string
 
     @Column({
-        type : DataType.STRING
+        type: DataType.STRING,
+        allowNull: false
     })
-    declare password: string
+    declare email: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    declare password: string;
 }
 
 export default User;
