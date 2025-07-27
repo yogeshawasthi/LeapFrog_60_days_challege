@@ -13,7 +13,7 @@ interface AuthRequest extends Request{
 }
 
 
-enum Role{
+ export enum Role{
   Admin = 'admin',
   Customer = 'customer'
 }

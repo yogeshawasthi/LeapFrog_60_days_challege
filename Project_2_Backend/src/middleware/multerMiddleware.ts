@@ -9,5 +9,15 @@ const storage = multer.diskStorage({
             return
         }
         cb(null,'./src/uploads')
+    },
+
+    filename : function(req:Request,file:Express.Multer.File,cb:any){
+        cb(null,Date.now()+ "-" +file.originalname)
     }
+
 })
+
+export{
+    multer ,
+    storage
+}

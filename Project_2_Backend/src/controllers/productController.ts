@@ -20,7 +20,7 @@ class ProductController{
             productDescription,
             productPrice,
             productTotalStockQty,
-            imageUrl: fileName
+           productImageUrl: fileName
         });
 
         res.status(201).json({ message: "Product created successfully" });
