@@ -2,7 +2,7 @@ import { Request, Response, Application, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User from "../database/models/useModel";
 
-interface AuthRequest extends Request{
+ export interface AuthRequest extends Request{
   user?:{
     username: string;
     email: string;
@@ -39,25 +39,26 @@ class AuthMiddleware {
       process.env.SECRET_KEY as string,
       async (err, decoded: any) => {
         if (err) {
-          res.status(403).json({
-            message: "Invalid Token",
-          });
+          res.status(403).json({ message: "Invalid Token" });
         } else {
-          //check whether if that decoded object id user exist or not
           try {
+            console.log("Decoded JWT:", decoded); // Add this
             const UserData = await User.findByPk(decoded.id);
+            console.log("Fetched UserData:", UserData); // Add this
             if (!UserData) {
-              res.status(403).json({
-                message: "No user with that token",
-              });
-              return; // Add return to prevent further execution
+              res.status(403).json({ message: "No user with that token" });
+              return;
             }
-            req.user = UserData;
+            req.user = {
+              id: UserData.id,
+              username: UserData.username,
+              email: UserData.email,
+              role: UserData.role,
+              password: UserData.password
+            };
             next();
           } catch (error) {
-            res.status(500).json({
-              message: "Something went wrong",
-            });
+            res.status(500).json({ message: "Something went wrong" });
           }
         }
       }

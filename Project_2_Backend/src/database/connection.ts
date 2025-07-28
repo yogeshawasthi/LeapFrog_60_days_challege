@@ -1,5 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from 'dotenv';
+import User from "./models/useModel";
+import Product from "./models/Product";
+import Category from "./models/Category";
 dotenv.config(); // Load environment variables
 
 const sequelize = new Sequelize({
@@ -20,8 +23,17 @@ sequelize.authenticate()
     console.log(err)
 })
 
+
+//relationships
+
 sequelize.sync({force :false}).then(()=>{
     console.log("Synced !!!")
 })
+
+User.hasMany(Product,{foreignKey:'userId'})
+Product.belongsTo(User,{foreignKey:'userId'})
+
+Product.belongsTo(Category,{foreignKey:'categoryId'})
+Category.hasOne(Product,{foreignKey:'categoryId'})
 
 export default sequelize
