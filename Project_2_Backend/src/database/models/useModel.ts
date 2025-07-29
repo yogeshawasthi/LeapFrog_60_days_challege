@@ -3,6 +3,7 @@ import {
     Column,
     Model,
     DataType,
+    AllowNull,
 } from 'sequelize-typescript'
 
 @Table({
@@ -26,7 +27,8 @@ class User extends Model {
 
     @Column({
        type: DataType.ENUM('customer','admin'),
-       defaultValue:"customer"
+       defaultValue: "customer",
+       allowNull: false
    })
    declare role : string
 

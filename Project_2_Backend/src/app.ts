@@ -10,19 +10,22 @@ import './database/connection'
 app.use(express.json())
 
 import userRoute from './routes/userRoute'
-// import adminSeeder from './adminSeeders';
+import adminSeeder from './adminSeeders';
 import productRoute from './routes/productRoutes';
+import categoryController from './controllers/categoryController';
 
 
 // Admin Seeder
-// adminSeeder()
+adminSeeder()
+
 
 //localhost:3000/register
-app.use("",userRoute)
+app.use("/",userRoute)
 app.use("/admin/products",productRoute)
 
 
 
 app.listen(PORT,()=>{
-    console.log(`Server is running on http://localhost:${PORT}`);
+    categoryController.seedCategory()
+    console.log(`Server is  running on http://localhost:${PORT}`);
 })

@@ -24,7 +24,7 @@ class Category extends Model{
         type: DataType.STRING,
         allowNull : false    
     })
-    declare CategoryName : string   
+    declare categoryName : string   
    
 }
 

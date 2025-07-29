@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import { exit } from "process";
 import { Console } from "console";
 
+const allowedRoles = ["user","admin"]
+
 class AuthCOntroller {
   public static async registerUser(req: Request, res: Response): Promise<void> {
     const { username, email, password, role } = req.body;
@@ -12,6 +14,13 @@ class AuthCOntroller {
     if (!username || !email || !password) {
       res.status(400).json({
         message: "Please Provide username , email , password",
+      });
+      return;
+    }
+
+    if(role && !allowedRoles.includes(role)){
+      res.status(400).json({
+        message : `Invalid Role`,
       });
       return;
     }

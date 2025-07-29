@@ -5,7 +5,7 @@ import Product from "./models/Product";
 import Category from "./models/Category";
 dotenv.config(); // Load environment variables
 
-const sequelize = new Sequelize({
+const  sequelize = new  Sequelize({
   database: process.env.DB_NAME,
   dialect: 'mysql',
   username: process.env.DB_USERNAME,
@@ -25,6 +25,7 @@ sequelize.authenticate()
 
 
 //relationships
+
 
 sequelize.sync({force :false}).then(()=>{
     console.log("Synced !!!")
