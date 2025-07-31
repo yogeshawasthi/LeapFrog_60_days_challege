@@ -82,7 +82,7 @@ class CategoryController {
       }
     }); 
     res.status(200).json({
-      mesage : "Category Added Sucessfully"
+      mesage : "Category Updated Sucessfully"
     })
   }
 }
