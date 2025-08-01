@@ -1,3 +1,4 @@
+import { NUMBER } from 'sequelize';
 import {
     Table,
     Column,
@@ -21,11 +22,11 @@ class Cart extends Model{
     declare id : string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull : false    
     })
-    declare Quantity : number   
-   
+    declare quantity : number;
+
 }
 
 export default Cart
