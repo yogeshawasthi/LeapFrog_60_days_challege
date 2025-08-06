@@ -21,3 +21,6 @@ Button.PropTypes = {
 }
 
 export default Button;
+
+
+// this is Button component

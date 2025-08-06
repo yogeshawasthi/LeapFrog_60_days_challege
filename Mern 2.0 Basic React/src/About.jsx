@@ -10,3 +10,4 @@ const About = () => {
 
 export default About
 // this is About page component
+// you can add more information about the application or team here
