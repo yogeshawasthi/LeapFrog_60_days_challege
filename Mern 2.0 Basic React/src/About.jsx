@@ -9,3 +9,4 @@ const About = () => {
 }
 
 export default About
+// this is About page component
