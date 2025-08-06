@@ -24,3 +24,4 @@ export default Button;
 
 
 // this is Button component
+// this is a reusable component
