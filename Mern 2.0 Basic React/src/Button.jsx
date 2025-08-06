@@ -25,3 +25,4 @@ export default Button;
 
 // this is Button component
 // this is a reusable component
+// you can use this component in any other component
