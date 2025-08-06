@@ -12,3 +12,6 @@ const router = createBrowserRouter([
 ])
 
 export default router
+
+// this is router path for the application
+// you can add more routes as per your requirement
