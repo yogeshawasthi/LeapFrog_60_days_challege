@@ -32,3 +32,7 @@ app.listen(PORT,()=>{
     categoryController.seedCategory()
     console.log(`Server is  running on http://localhost:${PORT}`);
 })
+
+
+//day is missing just need to add it
+//need to add day in the cart model
