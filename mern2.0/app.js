@@ -198,3 +198,4 @@ app.listen(3000, () => {
 })
 
 // Day 23 understood about webscoket  
+// missing old days
