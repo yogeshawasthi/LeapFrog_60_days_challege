@@ -8,7 +8,7 @@ const Book = require('./model/bookModel')
 
 // const ConnectionString="mongodb+srv://yogesh:yogesh@cluster0.bxt7lq1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-// Alternative
+// Alternative 
 //const app = require('express')()
 
 
