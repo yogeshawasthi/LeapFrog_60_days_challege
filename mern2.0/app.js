@@ -21,7 +21,7 @@ const cors = require('cors') // to allow cross-origin requests
 
 app.use(cors({
     origin: '*' //allow all sites whitleist to all of them
-    // origin:['http://localhost:5173'] // 
+    // origin:['http://localhost:5173'] / / 
 }))
 
 
