@@ -48,7 +48,7 @@ const EditBook = () => {
     const fetchBook = async()=>{
     const response =  await  axios.get("https://leapfrog-60-days-challege.onrender.com/book/"+ id)
     if(response.status===200){
-      // console.log(response.data.data)
+      // console.log(response.data.data)  to check the whether data is in the table or no t
       setData(response.data.data)
     }
 
