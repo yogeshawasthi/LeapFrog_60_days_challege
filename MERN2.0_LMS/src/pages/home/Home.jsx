@@ -16,7 +16,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    fetchBooks()// usse state hook is implimented here
+    fetchBooks()// usse state hook is implimented here 
   }, [])
 
 
