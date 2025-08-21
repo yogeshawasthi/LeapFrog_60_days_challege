@@ -40,7 +40,7 @@ const EditBook = () => {
       if(response.status===200){
         navigate("/book/"+ id)
       }else{
-        alert("Something went worng & Messy")
+        alert("Something  went worng & Messy")
       }
 
     }
