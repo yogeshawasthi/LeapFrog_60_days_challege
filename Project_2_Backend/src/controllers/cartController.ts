@@ -62,6 +62,32 @@ class CartController{
         }
 
     }
+    // async updateMyCarts(req:AuthRequest,res:Response):Promise<void>{
+    //     const userId = req.user?.id
+    //     const cartItems = await Cart.findAll({
+    //         where:{
+    //             userId
+    //         },
+    //         include:[
+    //             {
+    //             model : Product
+    //         }
+    //     ]
+    //     })
+
+    //     if(cartItems.length === 0){
+    //         res.status(404).json({
+    //             message: "No items found in cart"
+    //         })
+
+    //     }else{
+    //         res.status(200).json({
+    //             message: "Cart items fetched successfully",
+    //             data: cartItems
+    //         })
+    //     }
+
+    // }  this will be cart update module which will be done tommorwo in evening 
 }
 
 export default new CartController()
