@@ -48,7 +48,8 @@ class CartController{
                 model: Product,
                 include : [
                     {
-                        model: Category
+                        model: Category,
+                        attributes : ['id','categoryName']
                     }
                 ]
             }
