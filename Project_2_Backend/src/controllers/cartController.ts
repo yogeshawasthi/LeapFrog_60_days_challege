@@ -99,6 +99,8 @@ class CartController{
         
     }
 
+    // async updateCartItem() will be doing for update 
+
 }
 
 export default new CartController()
