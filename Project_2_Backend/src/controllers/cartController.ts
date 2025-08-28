@@ -92,6 +92,9 @@ class CartController{
             }
         })
 
+        res.status(200).json({
+            message: "Product of cart deleted Sucessf"
+        })
 
         
     }
