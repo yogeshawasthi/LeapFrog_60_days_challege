@@ -69,32 +69,30 @@ class CartController{
         }
 
     }
-    // async updateMyCarts(req:AuthRequest,res:Response):Promise<void>{
-    //     const userId = req.user?.id
-    //     const cartItems = await Cart.findAll({
-    //         where:{
-    //             userId
-    //         },
-    //         include:[
-    //             {
-    //             model : Product
-    //         }
-    //     ]
-    //     })
 
-    //     if(cartItems.length === 0){
-    //         res.status(404).json({
-    //             message: "No items found in cart"
-    //         })
+    async deleteMyCartItem(req:AuthRequest,res:Response):Promise<void>{
+        const userId = req.user?.id
+        const {id} = req.params.id
 
-    //     }else{
-    //         res.status(200).json({
-    //             message: "Cart items fetched successfully",
-    //             data: cartItems
-    //         })
-    //     }
+        const cartItem = await Cart.findOne({
+            where:{
+                id:id,
+                userId
+            }
+        })
 
-    // }  this will be cart update module which will be done tommorwo in evening 
+        if(!cartItem){
+            res.status(404).json({
+                message: "Cart item not found"
+            })
+        }else{
+            await cartItem.destroy()
+            res.status(200).json({
+                message: "Cart item deleted successfully"
+            })
+        }
+    }
+
 }
 
 export default new CartController()
