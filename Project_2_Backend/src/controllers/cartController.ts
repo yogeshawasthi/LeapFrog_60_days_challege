@@ -74,23 +74,26 @@ class CartController{
         const userId = req.user?.id
         const {productId} = req.params
 
-        const cartItem = await Cart.findOne({
-            where:{
-                id:productId,
-                userId
+        //check whether above product ID product exist or not 
+        const product = await Product.findByPk(productId)
+
+        if(!product){
+            res.status(404).json({
+                message: "Product not found"
+            })
+            return
+        }
+
+        // remove that product id
+        await Cart.destroy({
+            where: {
+                userId,
+               productId
             }
         })
 
-        if(!cartItem){
-            res.status(404).json({
-                message: "Cart item not found"
-            })
-        }else{
-            await cartItem.destroy()
-            res.status(200).json({
-                message: "Cart item deleted successfully"
-            })
-        }
+
+        
     }
 
 }
