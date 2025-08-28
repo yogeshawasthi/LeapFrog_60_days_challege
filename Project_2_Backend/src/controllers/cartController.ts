@@ -72,11 +72,11 @@ class CartController{
 
     async deleteMyCartItem(req:AuthRequest,res:Response):Promise<void>{
         const userId = req.user?.id
-        const {id} = req.params.id
+        const {productId} = req.params
 
         const cartItem = await Cart.findOne({
             where:{
-                id:id,
+                id:productId,
                 userId
             }
         })
