@@ -84,7 +84,7 @@ class CartController{
             return
         }
 
-        // remove that product id
+        // remove that product id i think i need to do it evening , skip at night 
         await Cart.destroy({
             where: {
                 userId,
