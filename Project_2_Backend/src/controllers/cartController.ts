@@ -120,6 +120,8 @@ class CartController{
         res.status(200).json({
             message : "Product has been updated sucessflyy", 
             data : cartData
+        })
+
     }
 
 }
