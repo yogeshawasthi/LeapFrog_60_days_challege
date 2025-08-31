@@ -109,7 +109,7 @@ class CartController{
             })
             return
         }
-        const cartData:any = await Cart.findOne({
+        const cartData = await Cart.findOne({
             where: {
                 userId,
                 productId
