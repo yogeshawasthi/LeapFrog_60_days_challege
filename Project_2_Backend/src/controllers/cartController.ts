@@ -115,7 +115,7 @@ class CartController{
                 productId
             }
         })
-        cartData.quantity = quantity
+        if(cartData) cartData.quantity = quantity
         await cartData?.save()
         res.status(200).json({
             message : "Product has been updated sucessflyy", 
