@@ -46,14 +46,18 @@ class CartController {
       include: [
         {
           model: Product,
+          attributes : ['productName','productDescription','productImageUrl'],
           include: [
             {
               model: Category,
-              attributes: ["id", "categoryName"],
-            },
-          ],
-        },
+              attributes: ['id', 'categoryName'],
+            }
+           ]
+        }
       ],
+
+      attributes : ['productId','quantity']
+
     });
 
     if (cartItems.length === 0) {
@@ -109,8 +113,10 @@ class CartController {
       where: {
         userId,
         productId,
-      },
+      }
     });
+
+
     if (cartData) {
       cartData.quantity = quantity;
       await cartData?.save();
