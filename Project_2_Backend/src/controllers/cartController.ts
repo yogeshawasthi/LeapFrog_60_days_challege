@@ -3,6 +3,11 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import Cart from "../database/models/Cart";
 import Product from "../database/models/Product";
 import Category from "../database/models/Category";
+// import { QueryTypes, Sequelize } from "sequelize";
+// import { Query } from "mysql2/typings/mysql/lib/protocol/sequences/Query";
+
+// const sequelize = new Sequelize
+
 
 class CartController {
   async addToCart(req: AuthRequest, res: Response): Promise<void> {
@@ -39,6 +44,17 @@ class CartController {
 
   async getMyCarts(req: AuthRequest, res: Response): Promise<void> {
     const userId = req.user?.id;
+    // const data = await sequelize.query(`
+    //   SELECT * FROM carts
+    //   `,{
+    //     type: QueryTypes.SELECT
+    //   })
+    //   res.status(200).json({
+    //     message: "Cart items fetched successfully",
+    //     data
+    //   });
+
+
     const cartItems = await Cart.findAll({
       where: {
         userId,
