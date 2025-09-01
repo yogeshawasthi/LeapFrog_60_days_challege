@@ -53,7 +53,7 @@ class CartController {
     //     message: "Cart items fetched successfully",
     //     data
     //   });
-
+ // this is raw sql query 
 
     const cartItems = await Cart.findAll({
       where: {
