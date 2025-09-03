@@ -7,8 +7,8 @@ import OrderDetail from "../database/models/OrderDetails";
 
 
 class OrderController {
-  // Define your controller methods here
-  async createOrder(req:AuthRequest,res:Response):Promise<void>{
+
+    async createOrder(req:AuthRequest,res:Response):Promise<void>{
     const userId = req.user?.id;
     const {phoneNumber,shippingAddress,totalAmount,paymentDetails,items}:OrderData = req.body;
     if(!phoneNumber || !shippingAddress || !totalAmount || !paymentDetails || !paymentDetails.paymentMethod || items.length===0){
@@ -39,5 +39,6 @@ class OrderController {
     }else{
         res.status(201).json({message:"Order Created Successfully with Cash on Delivery",orderData});
 
+    }
   }
 }
