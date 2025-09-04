@@ -43,4 +43,4 @@ class OrderController {
   } 
 }
 
-//today was my  sisters birthday so i cannot attend to complete the khalti integration i will defiently do it tommrow
+//today  was my  sisters birthday so i cannot attend to complete the khalti integration i will defiently do it tommrow
