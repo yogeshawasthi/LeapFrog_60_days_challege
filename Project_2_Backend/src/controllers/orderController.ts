@@ -40,7 +40,7 @@ class OrderController {
         res.status(201).json({message:"Order Created Successfully with Cash on Delivery",orderData});
 
     }
-  }
+  } 
 }
 
 //today was my sisters birthday so i cannot attend to complete the khalti integration i will defiently do it tommrow
