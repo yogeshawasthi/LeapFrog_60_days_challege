@@ -44,4 +44,4 @@ class OrderController {
 }
 
 //today  was my  sisters birthday so i cannot attend to complete the khalti integration i will defiently do it tommrow
-// sorry but i learned about
+// sorry but i learned about merchant account creation
