@@ -4,6 +4,7 @@ import { OrderData, PaymentMethod } from "../types/orderTypes";
 import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
+import axios from "axios";
 
 
 class OrderController {
@@ -36,6 +37,25 @@ class OrderController {
 
     if(paymentDetails.paymentMethod ==PaymentMethod.Khalti){
         //khalti integraton code
+        const data = {
+          return_url: "http://localhost:3000/success",
+          purchase_ordder_id: orderData.id,
+          amount : totalAmount*100,// accepts paisa only so converted rupes to paisa
+          website_url: "http://localhost:3000",
+          purchase_order_name: "OrderName_"+orderData.id,
+        
+        }
+        axios.post('https://khalti.com/api/v2/epayment/initiate/',data,{
+          headers: {
+            Authorization: `Key ${process.env.KHALTI_SECRET_KEY}`,
+            "Content-Type": "application/json"
+          }
+        }).then(response=>{
+          res.status(201).json({message:"Order Created Successfully",orderData,khaltiPaymentData:response.data});
+        }).catch(error=>{
+          res.status(500).json({message:"Error Creating Order",error});
+        });
+
     }else{
         res.status(201).json({message:"Order Created Successfully with Cash on Delivery",orderData});
 
