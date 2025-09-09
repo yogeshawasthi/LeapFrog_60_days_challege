@@ -63,7 +63,7 @@ class OrderController {
   } 
 }
 
-//  Today  was my  sisters birthday so i cannot attend to complete the khalti integration i will defiently do it tommrow
+//  Today  was my sisters birthday so i cannot attend to complete the khalti integration i will defiently do it tommrow
 // sorry but i learned about merchant account creation i will jump to integration  tomorrow i will complete my integration
 // so sad to hear 17 deaths in protest . it will be worst tommrow just like bangladesh
 // finally protest went successful as pm resigned but lots of people died in the process, as well as public properties were destroyed
