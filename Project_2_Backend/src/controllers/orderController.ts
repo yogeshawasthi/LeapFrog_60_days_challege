@@ -57,7 +57,7 @@ class OrderController {
         });
 
     }else{
-        res.status(201).json({message:"Order Created Successfully with Cash on Delivery",orderData});
+        res.status(201).json({message:"Order Created  Successfully with Cash on Delivery",orderData});
 
     }
   } 
