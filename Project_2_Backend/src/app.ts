@@ -15,6 +15,7 @@ import productRoute from './routes/productRoutes';
 import categoryController from './controllers/categoryController';
 import categoryRoute from './routes/categoryRoutes'
 import cartRoute from './routes/cartRoute'
+import orderRoutes from'./routes/orderRoutes'
 
 // Admin Seeder
 adminSeeder()
@@ -25,6 +26,7 @@ app.use("/",userRoute)
 app.use("/admin/product",productRoute)
 app.use("/admin/category",categoryRoute)
 app.use("/customer/cart",cartRoute)
+app.use("/customer/order",orderRoutes)
 
 
 
