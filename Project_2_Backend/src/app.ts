@@ -33,9 +33,11 @@ app.use("/customer/order",orderRoutes)
 app.listen(PORT,()=>{
     categoryController.seedCategory()
     console.log(`Server is  running on http://localhost:${PORT}`);
+
 })
 
 
 //day is missing just need to add it
 //need to add day in the cart model
 // New PM was declared and sushila karki
+// school will repopen form tommrow thats great news
