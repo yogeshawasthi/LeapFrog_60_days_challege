@@ -27,3 +27,11 @@ enum PaymentStatus{
     paid = 'paid',
     unpaid = 'unpaid'
 }
+
+export interface khaltiResponse{
+    pidx : string,
+    payment_url : string,
+    expires_at : Date | string,
+    expires_in : number,
+    user_fee : number
+}

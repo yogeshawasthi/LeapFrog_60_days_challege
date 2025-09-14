@@ -1,6 +1,6 @@
 import { AuthRequest } from "../middleware/authMiddleware";
 import { Response } from "express";
-import { OrderData, PaymentMethod } from "../types/orderTypes";
+import { khaltiResponse, OrderData, PaymentMethod } from "../types/orderTypes";
 import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
@@ -24,25 +24,24 @@ class OrderController {
       !paymentDetails.paymentMethod ||
       items.length === 0
     ) {
-      res
-        .status(400)
-        .json({
-          message:
-            "Please Provide phoneNumber,shippingAddress,totalAmount,paymentDetails,items",
-        });
+      res.status(400).json({
+        message:
+          "Please Provide phoneNumber,shippingAddress,totalAmount,paymentDetails,items",
+      });
       return;
     }
+    const paymentData = await Payment.create({
+      paymentMethod: paymentDetails.paymentMethod,
+    });
 
     const orderData = await Order.create({
       phoneNumber,
       shippingAddress,
       totalAmount,
       userId,
+      paymentId: paymentData.id,
     });
 
-    await Payment.create({
-      paymentMethod: paymentDetails.paymentMethod,
-    });
     for (var i = 0; i < items.length; i++) {
       await OrderDetail.create({
         quantity: items[i].quantity,
@@ -55,28 +54,41 @@ class OrderController {
       //khalti integraton code
       const data = {
         return_url: "http://localhost:3000/success",
-        purchase_ordder_id: orderData.id,
+        purchase_order_id: orderData.id,
         amount: totalAmount * 100, // accepts paisa only so converted rupes to paisa
         website_url: "http://localhost:3000",
         purchase_order_name: "OrderName_" + orderData.id,
       };
-      const response = await axios.post(
-        "https://khalti.com/api/v2/epayment/initiate/",
-        data,
-        {
-          headers: {
-            Authorization: "Key 1014d18482e3486d8fb65a0185b9f683",
-          },
-        }
-      );
-      console.log(response);
-    } else {
-      res
-        .status(200)
-        .json({
+      try {
+        const response = await axios.post(
+          'https://a.khalti.com/api/v2/epayment/initiate/',
+          data,
+          {
+            headers: {
+              'Authorization': 'Key 1014d18482e3486d8fb65a0185b9f683',
+            },
+          }
+        );
+        const khaltiResponse: khaltiResponse = response.data;
+        paymentData.pidx = khaltiResponse.pidx;
+        paymentData.save();
+        res.status(200).json({
           message: "Order Created Successfully ",
-          orderData,
+          url: khaltiResponse.payment_url,
         });
+      } catch (error) {
+        console.error("Khalti API error:", error.response?.data || error.message);
+        res.status(500).json({
+          message: "Khalti API Error",
+          errorMessage: error.response?.data || error.message,
+        });
+        return;
+      }
+    } else {
+      res.status(200).json({
+        message: "Order Created Successfully ",
+        orderData,
+      });
     }
   }
 }
