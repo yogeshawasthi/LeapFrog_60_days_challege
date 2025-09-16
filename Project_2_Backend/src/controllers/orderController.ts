@@ -77,11 +77,14 @@ class OrderController {
           url: khaltiResponse.payment_url,
         });
       } catch (error) {
-        console.error("Khalti API error:", error.response?.data || error.message);
-        res.status(500).json({
-          message: "Khalti API Error",
-          errorMessage: error.response?.data || error.message,
-        });
+        if (axios.isAxiosError(error)) {
+          console.error("Khalti API error:", error.response?.data || error.message);
+          res.status(500).json({
+            message: "Khalti API Error",
+            errorMessage: error.response?.data || error.message,
+          });
+        
+        }
         return;
       }
     } else {
