@@ -105,3 +105,4 @@ export default new OrderController();
 // cheif justice will be head of the country as pm under control today
 // i am loosing my battle i need some consistency
 // khalti integraton done
+// today i explored aws fellowship for 1 month 1 , 2,3 modules summmary as provided my teacher
