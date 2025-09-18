@@ -106,3 +106,5 @@ export default new OrderController();
 // i am loosing my battle i need some consistency
 // khalti integraton done
 // today i explored aws fellowship for 1 month 1 , 2,3 modules summmary as provided my teacher
+// clebrated vanza birthday so sorry for today , 
+// i though hosting will be tough but it was easy
