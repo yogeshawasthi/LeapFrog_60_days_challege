@@ -46,7 +46,7 @@ export interface TranscationVerificationResponse{
 
 }
 
-enum TranscationStatus{
+ export enum TranscationStatus{
     Completed = 'completed',
     Refunded = 'refunded',
     Pending = 'pending',

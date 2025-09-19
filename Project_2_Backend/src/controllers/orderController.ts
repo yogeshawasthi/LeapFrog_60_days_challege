@@ -1,6 +1,6 @@
 import { AuthRequest } from "../middleware/authMiddleware";
 import { Response } from "express";
-import { khaltiResponse, OrderData, PaymentMethod } from "../types/orderTypes";
+import { khaltiResponse, OrderData, PaymentMethod, TranscationStatus, TranscationVerificationResponse } from "../types/orderTypes";
 import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
@@ -108,8 +108,19 @@ class OrderController {
       headers : {
         'Authorization' : 'Key 1014d18482e3486d8fb65a0185b9f683'
       }
+    })
+    const data : TranscationVerificationResponse = 
+    response.data
+    if(data.status ==TranscationStatus.Completed)
+    {
+
+      
+    }else{
+      res.status(200).json({
+        message : "Payment is not Verified"
+      })
+
     }
-    )
   }
 }
 
