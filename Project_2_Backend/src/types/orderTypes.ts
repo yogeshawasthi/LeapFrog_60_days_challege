@@ -35,3 +35,13 @@ export interface khaltiResponse{
     expires_in : number,
     user_fee : number
 }
+
+export interface TranscationVerificationResponse{
+     "pidx": string,
+   "total_amount": 1000,
+   "status": "Completed",
+   "transaction_id": "GFq9PFS7b2iYvL8Lir9oXe",
+   "fee": 0,
+   "refunded": false
+
+}

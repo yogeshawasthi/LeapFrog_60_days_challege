@@ -5,6 +5,7 @@ import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
 import axios from "axios";
+import { pid } from "process";
 
 class OrderController {
   async createOrder(req: AuthRequest, res: Response): Promise<void> {
@@ -93,6 +94,22 @@ class OrderController {
         orderData,
       });
     }
+  }
+  async verifyTransaction(req:AuthRequest,res:Response):Promise<void>{
+    const {pidx} = req.body
+    const userId = req.user?.id
+    if(!pidx){
+      res.status(400).json({
+        message: "Please Provide pidx"
+      })
+      return
+    }
+    const response = await axios.post("https://a.khalti.com/api/v2/epayment/lookup/",{pidx},{
+      headers : {
+        'Authorization' : 'Key 1014d18482e3486d8fb65a0185b9f683'
+      }
+    }
+    )
   }
 }
 
