@@ -38,7 +38,7 @@ export interface khaltiResponse{
 
 export interface TranscationVerificationResponse{
      "pidx": string,
-   "total_amount": 1000,
+   "total_amount": number,
    "status": "Completed",
    "transaction_id": "GFq9PFS7b2iYvL8Lir9oXe",
    "fee": 0,
