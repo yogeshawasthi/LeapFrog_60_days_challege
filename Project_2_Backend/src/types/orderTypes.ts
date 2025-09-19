@@ -42,7 +42,7 @@ export interface TranscationVerificationResponse{
    status: TranscationStatus,
    transaction_id: string,
    fee: number,
-   refunded: false
+   refunded: boolean
 
 }
 
