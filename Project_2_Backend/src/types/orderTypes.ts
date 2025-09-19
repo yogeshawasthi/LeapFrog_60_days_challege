@@ -37,11 +37,18 @@ export interface khaltiResponse{
 }
 
 export interface TranscationVerificationResponse{
-     "pidx": string,
-   "total_amount": number,
-   "status": "Completed",
-   "transaction_id": "GFq9PFS7b2iYvL8Lir9oXe",
-   "fee": 0,
-   "refunded": false
+    pidx: string,
+   total_amount: number,
+   status: TranscationStatus,
+   transaction_id: string,
+   fee: number,
+   refunded: false
 
+}
+
+enum TranscationStatus{
+    Completed = 'completed',
+    Refunded = 'refunded',
+    Pending = 'pending',
+    Initiated = 'initiated'
 }
