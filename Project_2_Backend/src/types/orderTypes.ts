@@ -47,8 +47,8 @@ export interface TranscationVerificationResponse{
 }
 
  export enum TranscationStatus{
-    Completed = 'completed',
-    Refunded = 'refunded',
-    Pending = 'pending',
-    Initiated = 'initiated'
+    Completed = 'Completed',
+    Refunded = 'Refunded',
+    Pending = 'Pending',
+    Initiated = 'Initiated'
 }

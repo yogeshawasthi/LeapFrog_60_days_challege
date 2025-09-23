@@ -112,6 +112,7 @@ class OrderController {
     })
     const data : TranscationVerificationResponse = 
     response.data
+    console.log(data)
     if(data.status ==TranscationStatus.Completed)
     {
       let order= await Order.findAll({
