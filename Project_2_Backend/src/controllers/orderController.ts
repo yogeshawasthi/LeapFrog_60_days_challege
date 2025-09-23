@@ -120,9 +120,10 @@ class OrderController {
         },
         include :[
           { model : Payment }
+        
         ]
       })
-
+      console.log(order)
       
     }else{
       res.status(200).json({
