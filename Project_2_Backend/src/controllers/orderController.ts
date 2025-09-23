@@ -6,6 +6,7 @@ import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
 import axios from "axios";
 import { pid } from "process";
+import { Model } from "sequelize";
 
 class OrderController {
   async createOrder(req: AuthRequest, res: Response): Promise<void> {
@@ -113,6 +114,14 @@ class OrderController {
     response.data
     if(data.status ==TranscationStatus.Completed)
     {
+      let order= await Order.findAll({
+        where : {
+          userId : userId
+        },
+        include :[
+          { model : Payment }
+        ]
+      })
 
       
     }else{
