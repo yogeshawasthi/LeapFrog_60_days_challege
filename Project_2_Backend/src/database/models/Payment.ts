@@ -30,7 +30,7 @@ class Payment extends Model{
         type: DataType.ENUM('paid','unpaid',),
         defaultValue: 'unpaid'
     })
-    declare orderStatus : string   
+    declare paymentStatus : string
 
     @Column({
         type: DataType.STRING,

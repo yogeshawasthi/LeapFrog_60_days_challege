@@ -1,6 +1,12 @@
 import { AuthRequest } from "../middleware/authMiddleware";
 import { Response } from "express";
-import { khaltiResponse, OrderData, PaymentMethod, TranscationStatus, TranscationVerificationResponse } from "../types/orderTypes";
+import {
+  khaltiResponse,
+  OrderData,
+  PaymentMethod,
+  TranscationStatus,
+  TranscationVerificationResponse,
+} from "../types/orderTypes";
 import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
@@ -63,11 +69,11 @@ class OrderController {
       };
       try {
         const response = await axios.post(
-          'https://a.khalti.com/api/v2/epayment/initiate/',
+          "https://a.khalti.com/api/v2/epayment/initiate/",
           data,
           {
             headers: {
-              'Authorization': 'Key 1014d18482e3486d8fb65a0185b9f683',
+              Authorization: "Key 1014d18482e3486d8fb65a0185b9f683",
             },
           }
         );
@@ -80,12 +86,14 @@ class OrderController {
         });
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          console.error("Khalti API error:", error.response?.data || error.message);
+          console.error(
+            "Khalti API error:",
+            error.response?.data || error.message
+          );
           res.status(500).json({
             message: "Khalti API Error",
             errorMessage: error.response?.data || error.message,
           });
-        
         }
         return;
       }
@@ -96,41 +104,45 @@ class OrderController {
       });
     }
   }
-  async verifyTransaction(req:AuthRequest,res:Response):Promise<void>{
-    const {pidx} = req.body
-    const userId = req.user?.id
-    if(!pidx){
+  async verifyTransaction(req: AuthRequest, res: Response): Promise<void> {
+    const { pidx } = req.body;
+    const userId = req.user?.id;
+    if (!pidx) {
       res.status(400).json({
-        message: "Please Provide pidx"
-      })
-      return
+        message: "Please Provide pidx",
+      });
+      return;
     }
-    const response = await axios.post("https://a.khalti.com/api/v2/epayment/lookup/",{pidx},{
-      headers : {
-        'Authorization' : 'Key 1014d18482e3486d8fb65a0185b9f683'
-      }
-    })
-    const data : TranscationVerificationResponse = 
-    response.data
-    console.log(data)
-    if(data.status ==TranscationStatus.Completed)
-    {
-      let order= await Order.findAll({
-        where : {
-          userId : userId
+    const response = await axios.post(
+      "https://a.khalti.com/api/v2/epayment/lookup/",
+      { pidx },
+      {
+        headers: {
+          Authorization: "Key 1014d18482e3486d8fb65a0185b9f683",
         },
-        include :[
-          { model : Payment }
-        
-        ]
-      })
-      console.log(order)
-      
-    }else{
-      res.status(200).json({
-        message : "Payment is not Verified"
-      })
+      }
+    );
 
+    const data: TranscationVerificationResponse = response.data;
+    console.log(data);
+    if (data.status == TranscationStatus.Completed) {
+      await Payment.update(
+        {
+          paymentStatus: "paid",
+        },
+        {
+          where: {
+            pidx: pidx,
+          },
+        }
+      );
+      res.status(200).json({
+        message: "Payment verified sucessfully",
+      });
+    } else {
+      res.status(401).json({
+        message: "Payment is not Verified",
+      });
     }
   }
 }
@@ -145,7 +157,7 @@ export default new OrderController();
 // i am loosing my battle i need some consistency
 // khalti integraton done
 // today i explored aws fellowship for 1 month 1 , 2,3 modules summmary as provided my teacher
-// clebrated vanza birthday so sorry for today , 
+// clebrated vanza birthday so sorry for today ,
 // i though hosting will be tough but it was easy
 // i need to work on day time
 //  i am late so late painting work is being done i need to work less
