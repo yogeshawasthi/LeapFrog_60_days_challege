@@ -128,7 +128,7 @@ class OrderController {
     if (data.status == TranscationStatus.Completed) {
       await Payment.update(
         {
-          paymentStatus: "paid",
+          paymenttatus: "paid",
         },
         {
           where: {
