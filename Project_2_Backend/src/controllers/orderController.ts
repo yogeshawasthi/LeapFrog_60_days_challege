@@ -3,6 +3,7 @@ import { Response } from "express";
 import {
   khaltiResponse,
   OrderData,
+  OrderStatus,
   PaymentMethod,
   TranscationStatus,
   TranscationVerificationResponse,
@@ -13,6 +14,7 @@ import OrderDetail from "../database/models/OrderDetails";
 import axios from "axios";
 import { pid } from "process";
 import { Model, or } from "sequelize";
+import Product from "../database/models/Product";
 
 class OrderController {
   async createOrder(req: AuthRequest, res: Response): Promise<void> {
@@ -157,7 +159,7 @@ class OrderController {
         }
       ]
     })
-    if(orders.length === 0) {
+    if(orders.length > 0) {
       res.status(200).json({
         message : "order fetched sucessfully"
       })
@@ -174,8 +176,34 @@ async fetchOrderDetails(req:AuthRequest,res:Response):Promise<void>{
   const orderDetails = await Order.findAll({
     where :{
       orderId
-    }
+    },
+    include:[{
+      model : Product
+    }]
   })
+  if(orderDetails.length > 0) {
+      res.status(200).json({
+        message : "orderDetails fetched sucessfully"
+      })
+  }else{
+    res.status(404).json({
+      message: "No any orderdetails of the id",
+      data : []
+    })
+  }
+}
+async cancelMyOrder(req:AuthRequest,res:Response):Promise<void>{
+  const userId = req.user?.id
+  const orderId = req.params.id
+  const order = await Order.findAll({
+    where : {
+      userId,
+      id : orderId
+    }
+})
+if(order.orderStatus === OrderStatus.Ontheway || order.OrderStatus==OrderStatus.preparation)
+}
+
 }
 
 

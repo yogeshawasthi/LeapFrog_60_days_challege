@@ -52,6 +52,15 @@ export interface TranscationVerificationResponse{
     Pending = 'Pending',
     Initiated = 'Initiated'
 }
+
+export enum OrderStatus{
+    Pending = 'pending',
+    Cancelled = 'cancelled',
+    Ontheway = 'ontheway',
+    Delivered = 'delivered',
+    preparation = 'preparation'
+
+}
 //hi
 // the
 /// aja paral boke maile
