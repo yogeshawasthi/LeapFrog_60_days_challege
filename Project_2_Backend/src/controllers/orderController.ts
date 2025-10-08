@@ -12,7 +12,7 @@ import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
 import axios from "axios";
 import { pid } from "process";
-import { Model } from "sequelize";
+import { Model, or } from "sequelize";
 
 class OrderController {
   async createOrder(req: AuthRequest, res: Response): Promise<void> {
@@ -145,7 +145,39 @@ class OrderController {
       });
     }
   }
+  async fetchMyOrders(req:AuthRequest,res:Response):Promise<void>{
+    const userId = req.user?.id
+    const orders = await Order.findAll({
+      where :{
+        userId
+      },
+      include : [
+        {
+          model : Payment
+        }
+      ]
+    })
+    if(orders.length === 0) {
+      res.status(200).json({
+        message : "order fetched sucessfully"
+      })
+  }else{
+    res.status(404).json({
+      message: "you havent ordered anything yet ..",
+      data : []
+    })
+  }
 }
+async fetchOrderDetails(req:AuthRequest,res:Response):Promise<void>{
+  const userId = req.user?.id
+  const orderId = req.params.id
+  const orderDetails = await Order.findAll({
+    where :{
+      orderId
+    }
+  })
+}
+
 
 export default new OrderController();
 
