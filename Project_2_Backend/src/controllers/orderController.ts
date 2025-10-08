@@ -147,6 +147,7 @@ class OrderController {
       });
     }
   }
+  //customer side 
   async fetchMyOrders(req:AuthRequest,res:Response):Promise<void>{
     const userId = req.user?.id
     const orders = await Order.findAll({
@@ -195,15 +196,31 @@ async fetchOrderDetails(req:AuthRequest,res:Response):Promise<void>{
 async cancelMyOrder(req:AuthRequest,res:Response):Promise<void>{
   const userId = req.user?.id
   const orderId = req.params.id
-  const order = await Order.findAll({
+  const order:any = await Order.findAll({
     where : {
       userId,
       id : orderId
     }
 })
 if(order.orderStatus === OrderStatus.Ontheway || order.OrderStatus==OrderStatus.preparation)
+{
+  res.status(200).json({
+    message : "You cannot cancell order when ti ti sin on the eay or preparation "
+  })
+  return
 }
+await Order.update({ OrderStatus: OrderStatus.Cancelled },{
+    where: {
+      id: orderId,
+    },
+  });
+  res.status(200).json({
+    message : "Order Cancelled Successfully"
 
+})
+//customer side ends here
+
+}
 }
 
 
