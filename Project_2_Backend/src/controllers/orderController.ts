@@ -221,7 +221,19 @@ await Order.update({ OrderStatus: OrderStatus.Cancelled },{
 //customer side ends here
 
 }
-}
+
+async changeOrderStatus(req:AuthRequest,res:Response):Promise<void>{
+  const userId = req.user?.id
+  const {orderStatus}:OrderStatus = req.body
+  if(!orderStatus){
+    res.status(400).json({
+      message : 'jplease proveid eorderstatus'
+    })
+    return
+  }
+  
+  }
+ }
 
 
 export default new OrderController();
