@@ -233,12 +233,11 @@ async changeOrderStatus(req:AuthRequest,res:Response):Promise<void>{
       },
     });
 
-  if(!orderStatus){
-    res.status(400).json({
-      message : 'please provide order status'
+    res.status(200).json({
+      message: 'Order Status Updated Sucessfully'
     })
-    return
-  }
+
+ 
   
   }
  }
