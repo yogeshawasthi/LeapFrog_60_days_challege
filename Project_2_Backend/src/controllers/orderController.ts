@@ -1,5 +1,5 @@
 import { AuthRequest } from "../middleware/authMiddleware";
-import { Response } from "express";
+import { Response ,Request} from "express";
 import {
   khaltiResponse,
   OrderData,
@@ -223,7 +223,7 @@ await Order.update({ OrderStatus: OrderStatus.Cancelled },{
 }
 //Admin side Starts form here
 
-async changeOrderStatus(req:AuthRequest,res:Response):Promise<void>{
+async changeOrderStatus(req:Request,res:Response):Promise<void>{
   const orderId = req.params.id
   const orderStatus:OrderStatus = req.body.orderStatus
   await Order.update({ orderStatus
