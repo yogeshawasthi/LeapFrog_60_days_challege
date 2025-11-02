@@ -221,13 +221,21 @@ await Order.update({ OrderStatus: OrderStatus.Cancelled },{
 //customer side ends here
 
 }
+//Admin side Starts form here
 
 async changeOrderStatus(req:AuthRequest,res:Response):Promise<void>{
-  const userId = req.user?.id
-  const {orderStatus}:OrderStatus = req.body
+  const orderId = req.params.id
+  const orderStatus:OrderStatus = req.body.orderStatus
+  await Order.update({ orderStatus
+  },{
+      where: {
+        id: orderId,
+      },
+    });
+
   if(!orderStatus){
     res.status(400).json({
-      message : 'jplease proveid eorderstatus'
+      message : 'please provide order status'
     })
     return
   }
