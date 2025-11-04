@@ -221,7 +221,9 @@ await Order.update({ OrderStatus: OrderStatus.Cancelled },{
 //customer side ends here
 
 }
-//Admin side Starts form here
+//Admin side Starts form here 
+// more admin api are to come and will move to frontend
+// i will try more better frontend than the tutor
 
 async changeOrderStatus(req:Request,res:Response):Promise<void>{
   const orderId = req.params.id
