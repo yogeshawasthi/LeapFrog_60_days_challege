@@ -236,7 +236,7 @@ async changeOrderStatus(req:Request,res:Response):Promise<void>{
     });
 
     res.status(200).json({
-      message: 'Order Status Updated Sucessfully'
+      message: 'Order Status Updated  Sucessfully'
     })
 
  
