@@ -245,8 +245,9 @@ async changeOrderStatus(req:Request,res:Response):Promise<void>{
 
   async changePaymentStatus(req:Request,res:Response):Promise<void>{
     
- }
+  }
 
+}
 
 export default new OrderController();
 
