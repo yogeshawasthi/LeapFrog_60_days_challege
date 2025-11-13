@@ -215,7 +215,7 @@ await Order.update({ OrderStatus: OrderStatus.Cancelled },{
     },
   });
   res.status(200).json({
-    message : "Order Cancelled Successfully"
+    message : "Order Cancelled  Successfully"
 
 })
 //customer side ends here
