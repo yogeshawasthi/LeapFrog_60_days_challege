@@ -17,136 +17,136 @@ import { Model, or } from "sequelize";
 import Product from "../database/models/Product";
 
 class OrderController {
-  async createOrder(req: AuthRequest, res: Response): Promise<void> {
-    const userId = req.user?.id;
-    const {
-      phoneNumber,
-      shippingAddress,
-      totalAmount,
-      paymentDetails,
-      items,
-    }: OrderData = req.body;
-    if (
-      !phoneNumber ||
-      !shippingAddress ||
-      !totalAmount ||
-      !paymentDetails ||
-      !paymentDetails.paymentMethod ||
-      items.length === 0
-    ) {
-      res.status(400).json({
-        message:
-          "Please Provide phoneNumber,shippingAddress,totalAmount,paymentDetails,items",
-      });
-      return;
-    }
-    const paymentData = await Payment.create({
-      paymentMethod: paymentDetails.paymentMethod,
-    });
+  // async createOrder(req: AuthRequest, res: Response): Promise<void> {
+  //   const userId = req.user?.id;
+  //   const {
+  //     phoneNumber,
+  //     shippingAddress,
+  //     totalAmount,
+  //     paymentDetails,
+  //     items,
+  //   }: OrderData = req.body;
+  //   if (
+  //     !phoneNumber ||
+  //     !shippingAddress ||
+  //     !totalAmount ||
+  //     !paymentDetails ||
+  //     !paymentDetails.paymentMethod ||
+  //     items.length === 0
+  //   ) {
+  //     res.status(400).json({
+  //       message:
+  //         "Please Provide phoneNumber,shippingAddress,totalAmount,paymentDetails,items",
+  //     });
+  //     return;
+  //   }
+  //   const paymentData = await Payment.create({
+  //     paymentMethod: paymentDetails.paymentMethod,
+  //   });
 
-    const orderData = await Order.create({
-      phoneNumber,
-      shippingAddress,
-      totalAmount,
-      userId,
-      paymentId: paymentData.id,
-    });
+  //   const orderData = await Order.create({
+  //     phoneNumber,
+  //     shippingAddress,
+  //     totalAmount,
+  //     userId,
+  //     paymentId: paymentData.id,
+  //   });
 
-    for (var i = 0; i < items.length; i++) {
-      await OrderDetail.create({
-        quantity: items[i].quantity,
-        productId: items[i].productId,
-        orderId: orderData.id,
-      });
-    }
+  //   for (var i = 0; i < items.length; i++) {
+  //     await OrderDetail.create({
+  //       quantity: items[i].quantity,
+  //       productId: items[i].productId,
+  //       orderId: orderData.id,
+  //     });
+  //   }
 
-    if (paymentDetails.paymentMethod == PaymentMethod.Khalti) {
-      //khalti integraton code
-      const data = {
-        return_url: "http://localhost:3000/success",
-        purchase_order_id: orderData.id,
-        amount: totalAmount * 100, // accepts paisa only so converted rupes to paisa
-        website_url: "http://localhost:3000",
-        purchase_order_name: "OrderName_" + orderData.id,
-      };
-      try {
-        const response = await axios.post(
-          "https://a.khalti.com/api/v2/epayment/initiate/",
-          data,
-          {
-            headers: {
-              Authorization: "Key 1014d18482e3486d8fb65a0185b9f683",
-            },
-          }
-        );
-        const khaltiResponse: khaltiResponse = response.data;
-        paymentData.pidx = khaltiResponse.pidx;
-        paymentData.save();
-        res.status(200).json({
-          message: "Order Created Successfully ",
-          url: khaltiResponse.payment_url,
-        });
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          console.error(
-            "Khalti API error:",
-            error.response?.data || error.message
-          );
-          res.status(500).json({
-            message: "Khalti API Error",
-            errorMessage: error.response?.data || error.message,
-          });
-        }
-        return;
-      }
-    } else {
-      res.status(200).json({
-        message: "Order Created Successfully ",
-        orderData,
-      });
-    }
-  }
-  async verifyTransaction(req: AuthRequest, res: Response): Promise<void> {
-    const { pidx } = req.body;
-    const userId = req.user?.id;
-    if (!pidx) {
-      res.status(400).json({
-        message: "Please Provide pidx",
-      });
-      return;
-    }
-    const response = await axios.post(
-      "https://a.khalti.com/api/v2/epayment/lookup/",
-      { pidx },
-      {
-        headers: {
-          Authorization: "Key 1014d18482e3486d8fb65a0185b9f683",
-        },
-      }
-    );
+  //   if (paymentDetails.paymentMethod == PaymentMethod.Khalti) {
+  //     //khalti integraton code
+  //     const data = {
+  //       return_url: "http://localhost:3000/success",
+  //       purchase_order_id: orderData.id,
+  //       amount: totalAmount * 100, // accepts paisa only so converted rupes to paisa
+  //       website_url: "http://localhost:3000",
+  //       purchase_order_name: "OrderName_" + orderData.id,
+  //     };
+  //     try {
+  //       const response = await axios.post(
+  //         "https://a.khalti.com/api/v2/epayment/initiate/",
+  //         data,
+  //         {
+  //           headers: {
+  //             Authorization: "Key 1014d18482e3486d8fb65a0185b9f683",
+  //           },
+  //         }
+  //       );
+  //       const khaltiResponse: khaltiResponse = response.data;
+  //       paymentData.pidx = khaltiResponse.pidx;
+  //       paymentData.save();
+  //       res.status(200).json({
+  //         message: "Order Created Successfully ",
+  //         url: khaltiResponse.payment_url,
+  //       });
+  //     } catch (error) {
+  //       if (axios.isAxiosError(error)) {
+  //         console.error(
+  //           "Khalti API error:",
+  //           error.response?.data || error.message
+  //         );
+  //         res.status(500).json({
+  //           message: "Khalti API Error",
+  //           errorMessage: error.response?.data || error.message,
+  //         });
+  //       }
+  //       return;
+  //     }
+  //   } else {
+  //     res.status(200).json({
+  //       message: "Order Created Successfully ",
+  //       orderData,
+  //     });
+  //   }
+  // }
+  // async verifyTransaction(req: AuthRequest, res: Response): Promise<void> {
+  //   const { pidx } = req.body;
+  //   const userId = req.user?.id;
+  //   if (!pidx) {
+  //     res.status(400).json({
+  //       message: "Please Provide pidx",
+  //     });
+  //     return;
+  //   }
+  //   const response = await axios.post(
+  //     "https://a.khalti.com/api/v2/epayment/lookup/",
+  //     { pidx },
+  //     {
+  //       headers: {
+  //         Authorization: "Key 1014d18482e3486d8fb65a0185b9f683",
+  //       },
+  //     }
+  //   );
 
-    const data: TranscationVerificationResponse = response.data;
-    console.log(data);
-    if (data.status == TranscationStatus.Completed) {
-      await Payment.update(
-        {
-          paymenttatus: "paid",
-        },
-        {
-          where: {
-            pidx: pidx,
-          },
-        }
-      );
-      res.status(200).json({
-        message: "Payment verified sucessfully",
-      });
-    } else {
-      res.status(401).json({
-        message: "Payment is not Verified",
-      });
-    }
-  }
+  //   const data: TranscationVerificationResponse = response.data;
+  //   console.log(data);
+  //   if (data.status == TranscationStatus.Completed) {
+  //     await Payment.update(
+  //       {
+  //         paymenttatus: "paid",
+  //       },
+  //       {
+  //         where: {
+  //           pidx: pidx,
+  //         },
+  //       }
+  //     );
+  //     res.status(200).json({
+  //       message: "Payment verified sucessfully",
+  //     });
+  //   } else {
+  //     res.status(401).json({
+  //       message: "Payment is not Verified",
+  //     });
+  //   }
+  // }
   //customer side 
   async fetchMyOrders(req:AuthRequest,res:Response):Promise<void>{
     const userId = req.user?.id
@@ -272,3 +272,4 @@ export default new OrderController();
 // form tommorw i will be doing 2 hours moring and 2 hours evening coding
 // i need to do complete overview of the project form forntend to backend 
 // form tommorw i will be doing 2 hours moring and 2 hours evening coding
+//tommorw is my dadda ji 
