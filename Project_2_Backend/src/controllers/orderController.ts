@@ -17,7 +17,7 @@ import { Model, or } from "sequelize";
 import Product from "../database/models/Product";
 
 class OrderController {
-  // async createOrder(req: AuthRequest, res: Response): Promise<void> {
+  async createOrder(req: AuthRequest, res: Response): Promise<void> {
   //   const userId = req.user?.id;
   //   const {
   //     phoneNumber,
